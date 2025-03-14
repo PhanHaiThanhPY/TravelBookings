@@ -1,12 +1,11 @@
-/* eslint-disable react/no-unstable-nested-components */
 import { Link, Redirect, SplashScreen, Tabs } from 'expo-router';
 import React, { useCallback, useEffect } from 'react';
+import { Pressable, View } from 'react-native';
 
-import { useAuth, useIsFirstTime } from '@/lib';
 import IconBooking from '@/components/ui/icons/icon-booking';
 import IconDiagram from '@/components/ui/icons/icon-diagram';
-import { View, Pressable } from 'react-native';
 import IconHome from '@/components/ui/icons/icon-home';
+import { useAuth, useIsFirstTime } from '@/lib';
 
 export default function TabLayout() {
   const status = useAuth.use.status();
@@ -37,7 +36,7 @@ export default function TabLayout() {
           tabBarIcon: ({ focused }) => (
             <View className="items-center pt-2">
               {focused && (
-                <View className="absolute w-20 h-1 bg-blue-600 rounded-md" />
+                <View className="absolute h-1 w-20 rounded-md bg-blue-600" />
               )}
               <IconHome isActive={focused} />
             </View>
@@ -54,13 +53,35 @@ export default function TabLayout() {
       />
 
       <Tabs.Screen
+        name="room-diagram"
+        options={{
+          title: 'Sơ đồ phòng',
+          tabBarIcon: ({ focused }) => (
+            <View className="items-center pt-2">
+              {focused && (
+                <View className="absolute h-1 w-20 rounded-md bg-blue-600" />
+              )}
+              <IconDiagram isActive={focused} />
+            </View>
+          ),
+          tabBarButtonTestID: 'room-diagram-tab',
+          tabBarLabelStyle: {
+            fontSize: 14,
+            marginVertical: 5,
+          },
+          tabBarActiveTintColor: '#0866FF', // Màu khi tab được chọn
+          tabBarInactiveTintColor: '#6B7280', // Màu khi tab không được chọn
+        }}
+      />
+
+      <Tabs.Screen
         name="style"
         options={{
           title: 'Sơ đồ phòng',
           tabBarIcon: ({ focused }) => (
             <View className="items-center pt-2">
               {focused && (
-                <View className="absolute w-20 h-1 bg-blue-600 rounded-md" />
+                <View className="absolute h-1 w-20 rounded-md bg-blue-600" />
               )}
               <IconDiagram isActive={focused} />
             </View>
@@ -75,7 +96,6 @@ export default function TabLayout() {
           tabBarInactiveTintColor: '#6B7280', // Màu khi tab không được chọn
         }}
       />
-
       <Tabs.Screen
         name="settings"
         options={{
@@ -83,7 +103,7 @@ export default function TabLayout() {
           tabBarIcon: ({ focused }) => (
             <View className="items-center pt-2">
               {focused && (
-                <View className="absolute w-20 h-1 bg-blue-600 rounded-md" />
+                <View className="absolute h-1 w-20 rounded-md bg-blue-600" />
               )}
               <IconBooking isActive={focused} />
             </View>

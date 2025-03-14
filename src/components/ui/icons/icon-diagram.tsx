@@ -1,15 +1,5 @@
 import React from 'react';
-import {
-  Svg,
-  Path,
-  Defs,
-  LinearGradient,
-  Stop,
-  Mask,
-  ClipPath,
-  G,
-  Rect,
-} from 'react-native-svg';
+import { Path, Svg } from 'react-native-svg';
 
 interface IconDiagramProps {
   color?: string;
