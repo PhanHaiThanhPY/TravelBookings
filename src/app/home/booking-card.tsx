@@ -1,101 +1,43 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import React from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
 import * as Progress from 'react-native-progress';
 
 const BookingCard = () => {
   return (
-    <TouchableOpacity style={styles.card}>
-      <View style={styles.header}>
-        <View style={styles.iconContainer}>
+    <View className="m-4 gap-4 rounded-lg border border-gray-200 bg-white  p-4">
+      <View className="flex-row items-center gap-3">
+        <View className="flex size-12 items-center justify-center rounded-full bg-[#E6F0FF]">
           <Ionicons name="calendar" size={20} color="#007AFF" />
         </View>
-        <View style={styles.textContainer}>
-          <Text style={styles.title}>Đặt phòng mới</Text>
-          <Text style={styles.subtitle}>Hôm nay 18/02/2025</Text>
+        <View className="flex-col">
+          <Text className="text-xl font-bold text-black">Đặt phòng mới</Text>
+          <Text className="text-base text-gray-500">Hôm nay 18/02/2025</Text>
         </View>
       </View>
-      <View style={styles.progressContainer}>
+
+      <View className="flex-row items-center gap-3 ">
         <Progress.Circle
-          size={80}
-          progress={0.25} // 25% như trong hình
-          thickness={8}
+          size={70}
+          progress={4 / 16} // 25%
+          thickness={6}
           color="#007AFF"
           unfilledColor="#E0E0E0"
           borderWidth={0}
-          showsText={true}
+          showsText
           formatText={() => '25%'}
-          textStyle={styles.progressText}
+          textStyle={{ fontSize: 14, fontWeight: 'bold', color: '#007AFF' }}
         />
-        <View style={styles.stats}>
-          <Text style={styles.statsNumber}>4/16 phòng</Text>
-          <Text style={styles.statsLabel}>Khách đang sử dụng</Text>
+        <View className="flex-col">
+          <Text className="text-xl text-black">4/16 phòng</Text>
+          <Text className="text-base text-gray-500">Khách đang sử dụng</Text>
         </View>
+        <TouchableOpacity className="absolute right-4 top-4">
+          <Ionicons name="chevron-forward" size={24} color="#000" />
+        </TouchableOpacity>
       </View>
-      <TouchableOpacity style={styles.arrow}>
-        <Ionicons name="chevron-forward" size={24} color="#000" />
-      </TouchableOpacity>
-    </TouchableOpacity>
+    </View>
   );
 };
-
-const styles = StyleSheet.create({
-  card: {
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    margin: 16,
-    padding: 16,
-    elevation: 2,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  iconContainer: {
-    backgroundColor: '#E6F0FA',
-    borderRadius: 20,
-    padding: 8,
-    marginRight: 10,
-  },
-  textContainer: {
-    flex: 1,
-  },
-  title: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#333',
-  },
-  subtitle: {
-    fontSize: 14,
-    color: '#666',
-  },
-  progressContainer: {
-    alignItems: 'center',
-  },
-  stats: {
-    marginTop: 10,
-    alignItems: 'center',
-  },
-  statsNumber: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#333',
-  },
-  statsLabel: {
-    fontSize: 14,
-    color: '#666',
-  },
-  progressText: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: '#007AFF',
-  },
-  arrow: {
-    padding: 10,
-  },
-});
 
 export default BookingCard;

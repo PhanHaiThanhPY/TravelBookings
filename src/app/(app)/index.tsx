@@ -1,14 +1,14 @@
-import React from 'react';
-import { ScrollView, StyleSheet, StatusBar } from 'react-native';
-import Header from '../home/header';
-import CommentsList from '../home/comments-list';
-import DonutChartSection from '../home/donut-chart-section';
-import LineChartSection from '../home/line-chart-section';
-import RevenueCard from '../home/revenue-card';
-import UsageBarChart from '../home/usage-bar-chart';
 import { Stack } from 'expo-router';
-import BookingCard from '../home/booking-card';
+import React from 'react';
+import { ScrollView, StatusBar, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
+import BookingCard from '../home/booking-card';
+import CombinedRevenueChart from '../home/combined-revenue-chart';
+import DonutChartSection from '../home/donut-chart-section';
+import Header from '../home/header';
+import LeaderBoard from '../home/leader-board';
+import LineChartSection from '../home/line-chart-section';
 
 export default function HomeScreen() {
   return (
@@ -24,11 +24,10 @@ export default function HomeScreen() {
         <ScrollView style={styles.container}>
           <Header />
           <BookingCard />
-          <RevenueCard />
-          <UsageBarChart />
+          <CombinedRevenueChart />
           <LineChartSection />
           <DonutChartSection />
-          <CommentsList />
+          <LeaderBoard />
         </ScrollView>
       </SafeAreaView>
     </>
