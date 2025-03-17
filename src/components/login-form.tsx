@@ -1,24 +1,25 @@
+import { Ionicons } from '@expo/vector-icons';
 import { zodResolver } from '@hookform/resolvers/zod';
-import React, { useState, useRef } from 'react';
-import { useForm, Controller, SubmitHandler } from 'react-hook-form';
-import * as z from 'zod';
+import { Stack } from 'expo-router';
+import React, { useRef, useState } from 'react';
+import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import {
-  View,
-  Image,
-  TouchableOpacity,
-  TextInput,
-  Dimensions,
-  Pressable,
-  Keyboard,
   Animated,
+  Dimensions,
+  Image,
+  Keyboard,
+  Pressable,
   Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
+import LinearGradient from 'react-native-linear-gradient';
+import * as z from 'zod';
+
 import logoImage from '../components/ui/assets/bg-login.png'; // Replace with the actual logo path
 import logo from '../components/ui/assets/logo.png'; // Replace with the actual logo path
-import { Stack } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
-import LinearGradient from 'react-native-linear-gradient';
 
 const schema = z.object({
   username: z
@@ -48,7 +49,7 @@ export type LoginFormProps = {
 const { width, height } = Dimensions.get('window');
 const SPACING = 16;
 
-export const LoginForm = ({ onSubmit = () => {} }: LoginFormProps) => {
+export const LoginForm = ({ onSubmit = () => { } }: LoginFormProps) => {
   const {
     handleSubmit,
     control,
@@ -146,17 +147,17 @@ export const LoginForm = ({ onSubmit = () => {} }: LoginFormProps) => {
         contentContainerStyle={{ flexGrow: 1 }}
         className="relative"
       >
-        <Pressable className="flex-1 relative" onPress={Keyboard.dismiss}>
+        <Pressable className="relative flex-1" onPress={Keyboard.dismiss}>
           {/* Header with Logo */}
-          <View className="flex justify-center items-center">
+          <View className="flex items-center justify-center">
             <Image source={logoImage} className="w-full" />
-            <Image source={logo} className="absolute w-32 h-32 -bottom-10" />
+            <Image source={logo} className="absolute -bottom-10 size-32" />
           </View>
 
           {/* Form Container */}
           <View className="mt-20" style={{ width, padding: SPACING }}>
             <View style={{ gap: SPACING / 2, marginBottom: SPACING * 2 }}>
-              <Text className="font-bold text-[24px] text-neutral-900">
+              <Text className="text-[24px] font-bold text-neutral-900">
                 Đăng nhập tài khoản
               </Text>
               <Text className="text-[15px] text-neutral-500">
@@ -166,7 +167,7 @@ export const LoginForm = ({ onSubmit = () => {} }: LoginFormProps) => {
 
             {/* Username Input with Floating Label */}
             <View className="my-2">
-              <View className="relative border border-gray-300 rounded-2xl">
+              <View className="relative rounded-2xl border border-gray-300">
                 <Controller
                   control={control}
                   name="username"
@@ -203,7 +204,7 @@ export const LoginForm = ({ onSubmit = () => {} }: LoginFormProps) => {
                 />
               </View>
               {errors.username && (
-                <Text className="text-red-500 mt-1">
+                <Text className="mt-1 text-red-500">
                   {errors.username.message}
                 </Text>
               )}
@@ -211,7 +212,7 @@ export const LoginForm = ({ onSubmit = () => {} }: LoginFormProps) => {
 
             {/* Password Input with Floating Label */}
             <View className="my-4">
-              <View className="relative border border-gray-300 rounded-2xl flex-row items-center">
+              <View className="relative flex-row items-center rounded-2xl border border-gray-300">
                 <Controller
                   control={control}
                   name="password"
@@ -231,7 +232,7 @@ export const LoginForm = ({ onSubmit = () => {} }: LoginFormProps) => {
                         Mật khẩu
                       </Animated.Text>
                       <TextInput
-                        className="flex-1 h-[50px] px-4 text-gray-700 "
+                        className="h-[50px] flex-1 px-4 text-gray-700 "
                         secureTextEntry={isPasswordVisible}
                         onFocus={() =>
                           handleFocus(passwordAnim, setIsPasswordFocused)
@@ -259,20 +260,20 @@ export const LoginForm = ({ onSubmit = () => {} }: LoginFormProps) => {
                 </TouchableOpacity>
               </View>
               {errors.password && (
-                <Text className="text-red-500 mt-1">
+                <Text className="mt-1 text-red-500">
                   {errors.password.message}
                 </Text>
               )}
             </View>
 
             {/* Remember Me and Forgot Password */}
-            <View className="flex-row justify-between mb-4">
+            <View className="mb-4 flex-row justify-between">
               <TouchableOpacity
                 onPress={toggleRememberMe}
                 className="flex-row items-center"
               >
                 <View
-                  className={`w-5 h-5 border border-gray-400 rounded-sm mr-2 ${isRemembered ? 'bg-blue-500' : ''}`}
+                  className={`mr-2 size-5 rounded-sm border border-gray-400 ${isRemembered ? 'bg-blue-500' : ''}`}
                 />
                 <Text className="text-[14px] text-neutral-900">
                   Lưu đăng nhập
@@ -287,7 +288,7 @@ export const LoginForm = ({ onSubmit = () => {} }: LoginFormProps) => {
 
             <Pressable
               onPress={handleSubmit(onSubmit)}
-              className="flex-1 rounded-[12px] mb-4"
+              className="mb-4 flex-1 rounded-[12px]"
               disabled={!isValid}
             >
               <LinearGradient
@@ -299,15 +300,17 @@ export const LoginForm = ({ onSubmit = () => {} }: LoginFormProps) => {
                   alignItems: 'center',
                 }}
               >
-                <Text className="py-4 text-white font-bold">Đăng nhập</Text>
+                <Text className="py-4 font-bold text-white">Đăng nhập</Text>
               </LinearGradient>
             </Pressable>
 
             <TouchableOpacity
-              onPress={() => {}}
-              className="rounded-[12px] py-4 bg-gray-200"
+              onPress={() => { }}
+              className="rounded-[12px] bg-gray-200 py-4"
             >
-              <Text className="text-center text-[#001416] font-bold">Thoát</Text>
+              <Text className="text-center font-bold text-[#001416]">
+                Thoát
+              </Text>
             </TouchableOpacity>
           </View>
         </Pressable>

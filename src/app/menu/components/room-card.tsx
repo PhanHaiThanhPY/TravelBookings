@@ -2,11 +2,11 @@ import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
-import { roomStatusNames } from '../constants';
-import { roomStatusColors } from '../constants/colors';
-import { RoomStatus } from '../types';
-import { type Room } from '../types/room';
-import { OccupantCard } from './occupant-card';
+import { OccupantCard } from '../../room-diagram/components/occupant-card';
+import { roomStatusNames } from '../../room-diagram/constants';
+import { roomStatusColors } from '../../room-diagram/constants/colors';
+import { RoomStatus } from '../../room-diagram/types';
+import { type Room } from '../../room-diagram/types/room';
 
 interface RoomCardProps {
   room: Room;
@@ -26,12 +26,12 @@ export const RoomCard: React.FC<RoomCardProps> = ({ room, onPress }) => {
 
     return (
       <View className="h-full flex-row items-center gap-2">
-        <OccupantCard count={adultCount} size={18} iconName={'person'} />
         <OccupantCard
-          count={childCount}
+          count={adultCount}
           size={18}
           iconName={'person-outline'}
         />
+        <OccupantCard count={childCount} size={18} iconName={'child-care'} />
       </View>
     );
   };
@@ -86,3 +86,5 @@ export const RoomCard: React.FC<RoomCardProps> = ({ room, onPress }) => {
     </TouchableOpacity>
   );
 };
+
+export default RoomCard;

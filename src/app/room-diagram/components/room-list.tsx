@@ -1,11 +1,11 @@
 import React, { useMemo } from 'react';
 import { ScrollView, Text, View } from 'react-native';
 
+import { RoomCard } from '../../menu/components/room-card';
 import { areaData } from '../constants';
 import { mockRooms } from '../constants/rooms';
 import { RoomStatus } from '../types';
 import { type RoomListProps } from '../types/room';
-import { RoomCard } from './room-card';
 
 export const RoomList: React.FC<RoomListProps> = ({
   selectedArea,
@@ -74,3 +74,5 @@ export const RoomList: React.FC<RoomListProps> = ({
     </ScrollView>
   );
 };
+
+export default RoomList;

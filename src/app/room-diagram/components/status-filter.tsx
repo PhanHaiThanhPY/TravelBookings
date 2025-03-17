@@ -44,3 +44,5 @@ export const StatusFilter: React.FC<StatusFilterProps> = ({
     </ScrollView>
   );
 };
+
+export default StatusFilter;

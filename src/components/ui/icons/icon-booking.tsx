@@ -1,5 +1,5 @@
 import React from 'react';
-import { Svg, Path, Defs, LinearGradient, Stop } from 'react-native-svg';
+import { Path, Svg } from 'react-native-svg';
 
 interface IconBookingProps {
   color?: string;

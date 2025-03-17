@@ -13,6 +13,11 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       className="mb-1 ml-2 flex-1 text-base"
       placeholder={placeholder}
       placeholderTextColor="gray"
+      // value={value}
+      // onChangeText={onChangeText}
+      clearButtonMode="while-editing"
     />
   </View>
 );
+
+export default SearchBar;
