@@ -4,7 +4,7 @@ import { ScrollView, Text, View } from 'react-native';
 import { RoomCard } from '../../menu/components/room-card';
 import { areaData } from '../constants';
 import { mockRooms } from '../constants/rooms';
-import { RoomStatus } from '../types';
+import { RoomBookingStatus } from '../types';
 import { type RoomListProps } from '../types/room';
 
 export const RoomList: React.FC<RoomListProps> = ({
@@ -14,7 +14,7 @@ export const RoomList: React.FC<RoomListProps> = ({
   onRoomPress,
 }) => {
   const filteredRooms = useMemo(() => {
-    const isAllSelected = selectedStatuses.includes(RoomStatus.ALL);
+    const isAllSelected = selectedStatuses.includes(RoomBookingStatus.ALL);
     const searchQueryLower = searchQuery.toLowerCase();
 
     return mockRooms.filter((room) => {

@@ -73,3 +73,5 @@ export const ImageSlider: React.FC<ImageSliderProps> = ({ images }) => {
     </View>
   );
 };
+
+export default ImageSlider;

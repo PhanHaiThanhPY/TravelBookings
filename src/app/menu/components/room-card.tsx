@@ -3,9 +3,8 @@ import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
 import { OccupantCard } from '../../room-diagram/components/occupant-card';
-import { roomStatusNames } from '../../room-diagram/constants';
-import { roomStatusColors } from '../../room-diagram/constants/colors';
-import { RoomStatus } from '../../room-diagram/types';
+import { RoomBookingStatusColors } from '../../room-diagram/constants/colors';
+import { RoomBookingStatus, RoomStatus } from '../../room-diagram/types';
 import { type Room } from '../../room-diagram/types/room';
 
 interface RoomCardProps {
@@ -14,10 +13,10 @@ interface RoomCardProps {
 }
 
 export const RoomCard: React.FC<RoomCardProps> = ({ room, onPress }) => {
-  const colorRoom = roomStatusColors[room.status];
+  const colorRoom = RoomBookingStatusColors[room.status];
 
   const renderOccupants = () => {
-    if (room.status !== RoomStatus.OCCUPIED || !room.occupants?.length) {
+    if (room.status !== RoomBookingStatus.OCCUPIED || !room.occupants?.length) {
       return null;
     }
 
@@ -45,7 +44,7 @@ export const RoomCard: React.FC<RoomCardProps> = ({ room, onPress }) => {
         <View className="flex-row items-start gap-2">
           <View className={`rounded-lg px-2 py-1 ${colorRoom.background}`}>
             <Text className={`px-2 text-sm ${colorRoom.text}`}>
-              {roomStatusNames[room.status]}
+              {RoomStatus[room.status]}
             </Text>
           </View>
           {renderOccupants()}

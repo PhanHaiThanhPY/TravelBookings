@@ -1,13 +1,24 @@
-import { type Area, RoomStatus, type RoomStatusData } from './types';
+import {
+  type Area,
+  RoomBookingStatus,
+  type RoomBookingStatusData,
+  RoomStatus,
+} from './types';
 
-export const roomStatusNames: Record<RoomStatus, string> = {
+export const roomBookingStatusNames: Record<RoomBookingStatus, string> = {
+  [RoomBookingStatus.ALL]: 'Tất cả',
+  [RoomBookingStatus.AVAILABLE]: 'Phòng trống',
+  [RoomBookingStatus.OCCUPIED]: 'Đang sử dụng',
+  [RoomBookingStatus.RESERVED]: 'Đã được đặt',
+  [RoomBookingStatus.CLEANING]: 'Đang dọn dẹp',
+  [RoomBookingStatus.MAINTENANCE]: 'Đang sửa chữa',
+  [RoomBookingStatus.OUT_OF_SERVICE]: 'Không sẵn sàng',
+};
+
+export const roomStatusName: Record<RoomStatus, string> = {
   [RoomStatus.ALL]: 'Tất cả',
-  [RoomStatus.AVAILABLE]: 'Phòng trống',
-  [RoomStatus.OCCUPIED]: 'Đang sử dụng',
-  [RoomStatus.RESERVED]: 'Đã được đặt',
-  [RoomStatus.CLEANING]: 'Đang dọn dẹp',
-  [RoomStatus.MAINTENANCE]: 'Đang sửa chữa',
-  [RoomStatus.OUT_OF_SERVICE]: 'Không sẵn sàng',
+  [RoomStatus.ACTIVE]: 'Đang hoạt động',
+  [RoomStatus.IN_ACTIVE]: 'Tạm ngưng',
 };
 
 export const areaData: Area[] = [
@@ -25,12 +36,12 @@ export const areaData: Area[] = [
   { id: 10, name: 'Tầng 10' },
 ];
 
-export const statusData: RoomStatusData[] = [
-  { status: RoomStatus.ALL, count: 80 },
-  { status: RoomStatus.AVAILABLE, count: 80 },
-  { status: RoomStatus.OCCUPIED, count: 20 },
-  { status: RoomStatus.RESERVED, count: 20 },
-  { status: RoomStatus.CLEANING, count: 15 },
-  { status: RoomStatus.MAINTENANCE, count: 10 },
-  { status: RoomStatus.OUT_OF_SERVICE, count: 5 },
+export const statusData: RoomBookingStatusData[] = [
+  { status: RoomBookingStatus.ALL, count: 80 },
+  { status: RoomBookingStatus.AVAILABLE, count: 80 },
+  { status: RoomBookingStatus.OCCUPIED, count: 20 },
+  { status: RoomBookingStatus.RESERVED, count: 20 },
+  { status: RoomBookingStatus.CLEANING, count: 15 },
+  { status: RoomBookingStatus.MAINTENANCE, count: 10 },
+  { status: RoomBookingStatus.OUT_OF_SERVICE, count: 5 },
 ];

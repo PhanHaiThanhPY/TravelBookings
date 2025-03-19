@@ -6,22 +6,22 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { RoomList } from '../room-diagram/components/room-list';
 import { areaData } from '../room-diagram/constants';
 import RoomDiagramHeader from '../room-diagram/header';
-import { type Area, RoomStatus } from '../room-diagram/types';
+import { type Area, RoomBookingStatus } from '../room-diagram/types';
 
 export default function RoomDiagramScreen() {
   const [selectedArea, setSelectedArea] = useState<Area>(areaData[0]);
   const [showAreaDropdown, setShowAreaDropdown] = useState(false);
-  const [selectedStatuses, setSelectedStatuses] = useState<RoomStatus[]>([
-    RoomStatus.ALL,
+  const [selectedStatuses, setSelectedStatuses] = useState<RoomBookingStatus[]>([
+    RoomBookingStatus.ALL,
   ]);
   const [searchQuery, setSearchQuery] = useState('');
 
-  const toggleStatus = (statusId: RoomStatus) => {
-    if (statusId === RoomStatus.ALL) {
-      setSelectedStatuses([RoomStatus.ALL]);
+  const toggleStatus = (statusId: RoomBookingStatus) => {
+    if (statusId === RoomBookingStatus.ALL) {
+      setSelectedStatuses([RoomBookingStatus.ALL]);
     } else {
       let newSelectedStatuses = selectedStatuses.filter(
-        (id) => id !== RoomStatus.ALL
+        (id) => id !== RoomBookingStatus.ALL
       );
 
       if (newSelectedStatuses.includes(statusId)) {
@@ -33,7 +33,7 @@ export default function RoomDiagramScreen() {
       }
 
       if (newSelectedStatuses.length === 0) {
-        setSelectedStatuses([RoomStatus.ALL]);
+        setSelectedStatuses([RoomBookingStatus.ALL]);
       } else {
         setSelectedStatuses(newSelectedStatuses);
       }

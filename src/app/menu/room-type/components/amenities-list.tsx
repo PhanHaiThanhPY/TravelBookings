@@ -43,3 +43,5 @@ export const AmenitiesList: React.FC<AmenitiesListProps> = ({
     </View>
   );
 };
+
+export default AmenitiesList;

@@ -1,4 +1,4 @@
-import { RoomStatus } from '../types';
+import { RoomBookingStatus } from '../types';
 import { type Room } from '../types/room';
 
 export const mockRooms: Room[] = [
@@ -6,7 +6,7 @@ export const mockRooms: Room[] = [
     id: 'P101',
     number: 'P101',
     type: 'Double',
-    status: RoomStatus.AVAILABLE,
+    status: RoomBookingStatus.AVAILABLE,
     price: 1650000,
     areaId: 0,
     occupants: [
@@ -37,7 +37,7 @@ export const mockRooms: Room[] = [
     id: 'P102',
     number: 'P102',
     type: 'Single',
-    status: RoomStatus.OCCUPIED,
+    status: RoomBookingStatus.OCCUPIED,
     price: 1250000,
     areaId: 0,
     occupants: [
@@ -68,7 +68,7 @@ export const mockRooms: Room[] = [
     id: 'P201',
     number: 'P201',
     type: 'Suite',
-    status: RoomStatus.RESERVED,
+    status: RoomBookingStatus.RESERVED,
     price: 2150000,
     areaId: 1,
     occupants: [
@@ -99,7 +99,7 @@ export const mockRooms: Room[] = [
     id: 'P202',
     number: 'P202',
     type: 'Double',
-    status: RoomStatus.CLEANING,
+    status: RoomBookingStatus.CLEANING,
     price: 1650000,
     areaId: 1,
     occupants: [
