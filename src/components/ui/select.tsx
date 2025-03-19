@@ -82,7 +82,7 @@ export const Options = React.forwardRef<BottomSheetModal, OptionsProps>(
       ({ item }: { item: OptionType }) => (
         <Option
           key={`select-item-${item.value}`}
-          label={item.label}
+          label={item.value as string}
           selected={value === item.value}
           onPress={() => onSelect(item)}
           testID={testID ? `${testID}-item-${item.value}` : undefined}
@@ -123,11 +123,14 @@ const Option = React.memo(
   }) => {
     return (
       <Pressable
-        className="flex-row items-center border-b border-neutral-300 bg-white px-3 py-2 dark:border-neutral-700 dark:bg-neutral-800"
+        className="flex-row items-center  bg-white px-3 py-2 "
         {...props}
       >
-        <Text className="flex-1 dark:text-neutral-100 ">{label}</Text>
-        {selected && <Check />}
+        <View
+          className={`p-3 x ${selected ? 'border border-[#0866FF] bg-[#E6F0FF]' : 'border-b border-[#F3F4F6] '}  w-full rounded-xl`}
+        >
+          <Text className="flex-1 dark:text-neutral-100 ">{label}</Text>
+        </View>
       </Pressable>
     );
   }
@@ -249,21 +252,3 @@ export function ControlledSelect<T extends FieldValues>(
     />
   );
 }
-
-const Check = ({ ...props }: SvgProps) => (
-  <Svg
-    width={25}
-    height={24}
-    fill="none"
-    viewBox="0 0 25 24"
-    {...props}
-    className="stroke-black dark:stroke-white"
-  >
-    <Path
-      d="m20.256 6.75-10.5 10.5L4.506 12"
-      strokeWidth={2.438}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </Svg>
-);
