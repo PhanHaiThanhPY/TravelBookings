@@ -1,5 +1,5 @@
 import { Stack } from 'expo-router';
-import { ScrollView, Text, View } from 'react-native';
+import { FlatList, ScrollView, Text, View } from 'react-native';
 import { PieChart } from 'react-native-gifted-charts';
 
 import SlidingTab from '@/components/custom/sliding-tab';
@@ -48,6 +48,39 @@ const StatisticsThroughPlatformScreen: React.FC = () => {
   const handleTabChange = (key: string) => {
     console.log('Tab changed to:', key);
   };
+
+  const renderItem = ({ item, index }: { item: any; index: number }) => {
+    return (
+      <View
+        key={index}
+        className=" flex-row items-center border-b border-gray-200  py-2"
+      >
+        <View className="mr-2">
+          <View
+            style={{
+              backgroundColor: item.color,
+              width: 6,
+              height: 40,
+              borderRadius: 8,
+            }}
+          />
+        </View>
+        <View className="flex-1 flex-col items-start">
+          <Text className="text-base font-bold text-[#001416]">
+            {item.text}
+          </Text>
+          <Text className="text-base text-gray-500">Tổng số tiền</Text>
+        </View>
+        <View className=" flex-1 flex-col items-end">
+          <Text className="text-base text-blue-500 font-bold">40%</Text>
+          <Text className=" text-base text-gray-700">
+            {item.formattedValue}
+          </Text>
+        </View>
+      </View>
+    );
+  };
+
   return (
     <>
       <Stack.Screen
@@ -63,7 +96,7 @@ const StatisticsThroughPlatformScreen: React.FC = () => {
       <ScrollView className="flex-1">
         <View className="flex-1 bg-white px-4">
           {/* Tab Buttons */}
-          <View className="flex-1 items-center justify-center  py-2">
+          <View className="flex-1 items-center justify-center  py-3">
             <SlidingTab
               tabs={[
                 { key: 'quantity', label: 'Theo số lượng' },
@@ -121,35 +154,13 @@ const StatisticsThroughPlatformScreen: React.FC = () => {
             </View>
           </View>
 
-          {/* Legend */}
-          <View className="my-6">
-            {pieData.map((item, index) => (
-              <View key={index} className="mb-3 flex-row items-center">
-                <View className="mr-2">
-                  <View
-                    style={{
-                      backgroundColor: item.color,
-                      width: 4,
-                      height: 40,
-                      borderRadius: 8,
-                    }}
-                  />
-                </View>
-                <View className="flex-1 flex-col items-start">
-                  <Text className="text-base font-bold text-[#001416]">
-                    {item.text}
-                  </Text>
-                  <Text className="text-base text-gray-500">Tổng số tiền</Text>
-                </View>
-                <View className=" flex-1 flex-col items-end">
-                  <Text className="text-base text-gray-500">40%</Text>
-                  <Text className=" text-base text-gray-700">
-                    {item.formattedValue}
-                  </Text>
-                </View>
-              </View>
-            ))}
-          </View>
+          <FlatList
+            scrollEnabled={false}
+            data={pieData}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.text}
+            showsVerticalScrollIndicator={false}
+          />
         </View>
       </ScrollView>
     </>

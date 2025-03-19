@@ -7,6 +7,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import IconGrowth from '@/components/ui/icons/icon-growth';
 import IconGrowth2 from '@/components/ui/icons/icon-growth2';
 import { IconWallet } from '@/components/ui/icons/icon-wallet';
+import SelectedDropdown from '@/components/custom/selected-dropdown';
 
 // Lấy chiều rộng màn hình
 const screenWidth = Dimensions.get('window').width;
@@ -76,6 +77,16 @@ const CombinedRevenueChart = () => {
       setSelectedBarIndex(index); // Chọn cột mới
     }
   };
+  const options = [
+    { id: 1, label: 'Hôm nay', icon: 'calendar-today' },
+    { id: 2, label: 'Hôm qua', icon: 'calendar-today' },
+    { id: 3, label: '7 ngày qua', icon: 'calendar-today' },
+    { id: 4, label: 'Tháng này', icon: 'calendar-today' },
+    { id: 5, label: 'Tháng trước', icon: 'calendar-today' },
+    { id: 6, label: 'Năm nay', icon: 'calendar-today' },
+    { id: 7, label: 'Năm trước', icon: 'calendar-today' },
+    { id: 8, label: 'Tùy chọn', icon: 'calendar-today' },
+  ];
 
   return (
     <View className="mx-4 gap-4 rounded-lg border border-gray-200 bg-white p-3">
@@ -85,10 +96,14 @@ const CombinedRevenueChart = () => {
           <IconWallet />
           <Text className="text-base font-bold text-black">Doanh thu</Text>
         </View>
-        <View className="flex-row items-center justify-between gap-1 rounded-full bg-[#F7F7F7] px-4 py-2">
-          <Feather name="calendar" size={24} color="#374151" />
-          <Text className="text-[16px] text-[#374151]">Tháng này</Text>
-          <Entypo name="chevron-small-down" size={26} color="#374151" />
+        <View className="flex-row items-center justify-between gap-1 rounded-full bg-[#F7F7F7] ">
+          <SelectedDropdown
+            headerIcon="calendar-today"
+            options={options as any}
+            defaultValue="Tháng này"
+            onSelect={(value) => console.log(value)}
+            placeholder="Chọn thời gian"
+          />
         </View>
       </View>
 
