@@ -69,3 +69,5 @@ export const AreaDropdown: React.FC<AreaDropdownProps> = ({
     </View>
   );
 };
+
+export default AreaDropdown;
