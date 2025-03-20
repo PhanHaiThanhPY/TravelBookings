@@ -6,7 +6,8 @@ export const mockRooms: Room[] = [
     id: 'P101',
     number: 'P101',
     type: 'Double',
-    status: RoomBookingStatus.AVAILABLE,
+    booking_status: RoomBookingStatus.AVAILABLE,
+    status: 1,
     price: 1650000,
     areaId: 0,
     occupants: [
@@ -37,7 +38,8 @@ export const mockRooms: Room[] = [
     id: 'P102',
     number: 'P102',
     type: 'Single',
-    status: RoomBookingStatus.OCCUPIED,
+    booking_status: RoomBookingStatus.OCCUPIED,
+    status: 1,
     price: 1250000,
     areaId: 0,
     occupants: [
@@ -68,7 +70,8 @@ export const mockRooms: Room[] = [
     id: 'P201',
     number: 'P201',
     type: 'Suite',
-    status: RoomBookingStatus.RESERVED,
+    booking_status: RoomBookingStatus.RESERVED,
+    status: 1,
     price: 2150000,
     areaId: 1,
     occupants: [
@@ -99,7 +102,8 @@ export const mockRooms: Room[] = [
     id: 'P202',
     number: 'P202',
     type: 'Double',
-    status: RoomBookingStatus.CLEANING,
+    booking_status: RoomBookingStatus.CLEANING,
+    status: 1,
     price: 1650000,
     areaId: 1,
     occupants: [

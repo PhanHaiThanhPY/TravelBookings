@@ -1,12 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Modal,
-  Pressable,
-  TextInput,
-} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Modal, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 type DateRange = {
   start: Date | null;
@@ -234,7 +227,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
     <View className="flex">
       {/* Date display that opens the picker when pressed */}
       <TouchableOpacity
-        className="px-4 py-3 border border-gray-300 rounded-lg"
+        className="rounded-lg border border-gray-300 px-4 py-3"
         onPress={() => setIsVisible(true)}
       >
         <Text className="text-gray-600">{getDisplayText()}</Text>
@@ -247,37 +240,40 @@ const DatePicker: React.FC<DatePickerProps> = ({
         visible={isVisible}
         onRequestClose={() => setIsVisible(false)}
       >
-        <View className="flex-1 justify-center items-center bg-black/50">
-          <View className="bg-white rounded-lg w-11/12 max-w-md">
+        <View className="flex-1 items-center justify-center bg-black/50">
+          <View className="w-11/12 max-w-md rounded-lg bg-white">
             {/* Header */}
-            <View className="flex-row justify-between items-center p-4 border-b border-gray-200">
-              <Text className="text-xl font-bold text-center flex-1">
+            <View className="flex-row items-center justify-between border-b border-gray-200 p-4">
+              <Text className="flex-1 text-center text-xl font-bold">
                 {title}
               </Text>
               <TouchableOpacity
                 onPress={() => setIsVisible(false)}
                 className="absolute right-4"
-              >
-              </TouchableOpacity>
+              ></TouchableOpacity>
             </View>
 
             {/* Month navigation */}
-            <View className="flex-row justify-between items-center p-2 mx-4 mt-4 bg-gray-100 rounded-lg">
-              <TouchableOpacity onPress={goToPrevMonth} className="p-2">
-              </TouchableOpacity>
+            <View className="mx-4 mt-4 flex-row items-center justify-between rounded-lg bg-gray-100 p-2">
+              <TouchableOpacity
+                onPress={goToPrevMonth}
+                className="p-2"
+              ></TouchableOpacity>
               <Text className="text-lg font-semibold">
                 {months[currentMonth]} - {currentYear}
               </Text>
-              <TouchableOpacity onPress={goToNextMonth} className="p-2">
-              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={goToNextMonth}
+                className="p-2"
+              ></TouchableOpacity>
             </View>
 
             {/* Weekday headers */}
-            <View className="flex-row justify-between mt-4 px-4">
+            <View className="mt-4 flex-row justify-between px-4">
               {weekdays.map((day, index) => (
                 <Text
                   key={index}
-                  className={`text-center w-10 ${index >= 5 ? 'text-red-500' : 'text-gray-500'}`}
+                  className={`w-10 text-center ${index >= 5 ? 'text-red-500' : 'text-gray-500'}`}
                 >
                   {day}
                 </Text>
@@ -285,27 +281,27 @@ const DatePicker: React.FC<DatePickerProps> = ({
             </View>
 
             {/* Separator line */}
-            <View className="border-b border-gray-200 mt-2" />
+            <View className="mt-2 border-b border-gray-200" />
 
             {/* Calendar grid */}
             <View className="flex-row flex-wrap px-4 py-2">
               {days.map((day, index) => (
                 <TouchableOpacity
                   key={index}
-                  className="w-10 h-10 items-center justify-center"
+                  className="size-10 items-center justify-center"
                   onPress={() => handleDaySelect(day)}
                   disabled={!day}
                 >
                   {day ? (
                     <View
-                      className={`w-8 h-8 rounded-full items-center justify-center
+                      className={`size-8 items-center justify-center rounded-full
                         ${isDaySelected(day) ? 'bg-blue-500' : ''}
                       `}
                     >
                       <Text
                         className={`
-                          ${isDaySelected(day) ? 'text-white font-bold' : 'text-gray-700'}
-                          ${isToday(day) && !isDaySelected(day) ? 'text-blue-500 font-bold' : ''}
+                          ${isDaySelected(day) ? 'font-bold text-white' : 'text-gray-700'}
+                          ${isToday(day) && !isDaySelected(day) ? 'font-bold text-blue-500' : ''}
                           ${!isDaySelected(day) && day % 7 === 0 ? 'text-gray-400' : ''}
                         `}
                       >
@@ -318,22 +314,22 @@ const DatePicker: React.FC<DatePickerProps> = ({
             </View>
 
             {/* Date range inputs */}
-            <View className="px-4 pb-4 mt-2">
-              <View className="border-t border-b border-gray-200 py-4">
-                <View className="flex-row justify-between items-center">
+            <View className="mt-2 px-4 pb-4">
+              <View className="border-y border-gray-200 py-4">
+                <View className="flex-row items-center justify-between">
                   <View className="flex-1">
-                    <Text className="text-gray-500 text-xs mb-1">Từ</Text>
+                    <Text className="mb-1 text-xs text-gray-500">Từ</Text>
                     <TextInput
-                      className="border border-gray-300 rounded-lg p-3"
+                      className="rounded-lg border border-gray-300 p-3"
                       value={startDateText}
                       editable={false}
                     />
                   </View>
                   <Text className="mx-2 text-gray-400">–</Text>
                   <View className="flex-1">
-                    <Text className="text-gray-500 text-xs mb-1">Đến</Text>
+                    <Text className="mb-1 text-xs text-gray-500">Đến</Text>
                     <TextInput
-                      className="border border-gray-300 rounded-lg p-3"
+                      className="rounded-lg border border-gray-300 p-3"
                       value={endDateText}
                       editable={false}
                     />
@@ -342,18 +338,18 @@ const DatePicker: React.FC<DatePickerProps> = ({
               </View>
 
               {/* Action buttons */}
-              <View className="flex-row justify-between mt-4">
+              <View className="mt-4 flex-row justify-between">
                 <TouchableOpacity
-                  className="flex-1 p-4 rounded-lg items-center mr-2 border border-gray-300"
+                  className="mr-2 flex-1 items-center rounded-lg border border-gray-300 p-4"
                   onPress={() => setIsVisible(false)}
                 >
-                  <Text className="text-gray-700 font-semibold">Trở lại</Text>
+                  <Text className="font-semibold text-gray-700">Trở lại</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  className="flex-1 p-4 bg-blue-500 rounded-lg items-center ml-2"
+                  className="ml-2 flex-1 items-center rounded-lg bg-blue-500 p-4"
                   onPress={applyDateRange}
                 >
-                  <Text className="text-white font-semibold">Áp dụng</Text>
+                  <Text className="font-semibold text-white">Áp dụng</Text>
                 </TouchableOpacity>
               </View>
             </View>

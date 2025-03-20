@@ -36,6 +36,11 @@ export const areaData: Area[] = [
   { id: 10, name: 'Tầng 10' },
 ];
 
+export const viewTypeData = [
+  { id: 1, name: 'Danh sách', icon: 'logo-tableau' },
+  { id: 2, name: 'Lưới', icon: 'list' },
+];
+
 export const statusData: RoomBookingStatusData[] = [
   { status: RoomBookingStatus.ALL, count: 80 },
   { status: RoomBookingStatus.AVAILABLE, count: 80 },

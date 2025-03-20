@@ -2,8 +2,8 @@ import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 
-import { RoomBookingStatusColors } from '@/app/room-diagram/constants/colors';
 import { roomStatusName } from '@/app/room-diagram/constants';
+import { RoomBookingStatusColors } from '@/app/room-diagram/constants/colors';
 import { type RoomStatus } from '@/app/room-diagram/types';
 import { type Room } from '@/app/room-diagram/types/room';
 
@@ -37,7 +37,9 @@ export const RoomList: React.FC<RoomListProps> = ({
             <View className="flex-row items-center justify-between">
               <View className="flex-row items-center gap-4">
                 <View
-                  className={`size-6 items-center justify-center rounded-full border-2 transition-colors ${isSelected ? 'border-blue-600 bg-blue-600' : 'border-gray-300'
+                  className={`size-6 items-center justify-center rounded-full border-2 transition-colors ${isSelected
+                      ? 'border-blue-600 bg-blue-600'
+                      : 'border-gray-300'
                     }`}
                 >
                   {isSelected && (
@@ -67,3 +69,5 @@ export const RoomList: React.FC<RoomListProps> = ({
     </ScrollView>
   );
 };
+
+export default RoomList;

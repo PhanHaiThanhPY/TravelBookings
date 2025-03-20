@@ -74,7 +74,7 @@ export default function TabLayout() {
         }}
       />
 
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name="style"
         options={{
           title: 'Sơ đồ phòng',
@@ -95,10 +95,10 @@ export default function TabLayout() {
           tabBarActiveTintColor: '#0866FF', // Màu khi tab được chọn
           tabBarInactiveTintColor: '#6B7280', // Màu khi tab không được chọn
         }}
-      />
+      /> */}
 
       <Tabs.Screen
-        name="settings"
+        name="booking"
         options={{
           title: 'Booking',
           tabBarIcon: ({ focused }) => (
@@ -110,7 +110,7 @@ export default function TabLayout() {
             </View>
           ),
           headerRight: () => <CreateNewPostLink />,
-          tabBarButtonTestID: 'settings-tab',
+          tabBarButtonTestID: 'booking-tab',
           tabBarLabelStyle: {
             fontSize: 14,
             marginVertical: 5,
@@ -133,7 +133,7 @@ export default function TabLayout() {
             </View>
           ),
           headerRight: () => <CreateNewPostLink />,
-          tabBarButtonTestID: 'settings-tab',
+          tabBarButtonTestID: 'menu-tab',
           tabBarLabelStyle: {
             fontSize: 14,
             marginVertical: 5,

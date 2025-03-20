@@ -2,7 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 import { Text, View } from 'react-native';
 
-import { AreaDropdown } from './components/area-dropdown';
+import AreaDropdown from './components/area-dropdown';
 import { SearchBar } from './components/search-bar';
 import { StatusFilter } from './components/status-filter';
 import { type Area, type RoomBookingStatus } from './types';
@@ -13,6 +13,7 @@ interface RoomDiagramHeaderProps {
   selectedStatuses: RoomBookingStatus[];
   searchQuery: string;
   onToggleStatus: (statusId: RoomBookingStatus) => void;
+  onReloadData?: () => void;
   onSelectArea: (area: Area) => void;
   onToggleDropdown: () => void;
   setSearchQuery: (query: string) => void;

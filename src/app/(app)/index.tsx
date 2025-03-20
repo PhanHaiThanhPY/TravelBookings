@@ -1,13 +1,14 @@
 import { Stack } from 'expo-router';
+import React from 'react';
 import { ScrollView, StatusBar, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
 import BookingCard from '../home/booking-card';
 import CombinedRevenueChart from '../home/combined-revenue-chart';
 import DonutChartSection from '../home/donut-chart-section';
 import Header from '../home/header';
 import LeaderBoard from '../home/leader-board';
 import LineChartSection from '../home/line-chart-section';
-import React from 'react';
 
 export default function HomeScreen() {
   return (
@@ -24,7 +25,7 @@ export default function HomeScreen() {
           <Header />
           <BookingCard />
           {/* <DatePicker
-            onDateSelect={() => {}}
+            onDateSelect={() => { }}
             title="Chọn thời gian"
             rangeSelection={true}
           /> */}
