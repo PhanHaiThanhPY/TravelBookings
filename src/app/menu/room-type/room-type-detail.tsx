@@ -10,24 +10,53 @@ import {
   View,
 } from 'react-native';
 
-import {
-  BusinessStatus,
-  businessStatusColors,
-  businessStatusNames,
-} from '@/app/room-diagram/types/business';
+import { RoomBookingStatus } from '@/app/room-diagram/types';
+import { BusinessStatus } from '@/app/room-diagram/types/business';
 
-import { ImageSlider } from './components/ImageSlider';
+import { type Room } from '../../room-diagram/types/room';
+import ImageSlider from './components/image-slider';
+import { RoomList } from './components/room-list';
+import { RoomTypeHeader } from './components/room-type-header';
 import { type IRoomType } from './types';
 
 const RoomTypeDetail = () => {
   const roomTypeDetail = useLocalSearchParams() as unknown as IRoomType;
   const { id } = roomTypeDetail;
   const [selectedTab, setSelectedTab] = useState('info');
+  const [selectedRooms, setSelectedRooms] = useState<string[]>([]);
+  const [showTransferModal, setShowTransferModal] = useState(false);
+  const [selectedRoomType, setSelectedRoomType] = useState<string | null>(null);
+  const roomTypes = [
+    {
+      id: '1',
+      name: 'Standard Room',
+      standardCapacity: 2,
+      maxCapacity: 3,
+      roomCount: 10,
+      price: 500000,
+    },
+    {
+      id: '2',
+      name: 'Deluxe Room',
+      standardCapacity: 2,
+      maxCapacity: 4,
+      roomCount: 8,
+      price: 800000,
+    },
+    {
+      id: '3',
+      name: 'Suite Room',
+      standardCapacity: 3,
+      maxCapacity: 6,
+      roomCount: 5,
+      price: 1200000,
+    },
+  ];
   const [slideAnim] = useState(new Animated.Value(0));
   const [isEnabled, setIsEnabled] = useState(
     Number(roomTypeDetail.status) === BusinessStatus.DOING_BUSINESS
   );
-  const [showAmenities, setShowAmenities] = useState(false);
+  // const [showAmenities, setShowAmenities] = useState(false);
 
   React.useEffect(() => {
     Animated.timing(slideAnim, {
@@ -37,76 +66,38 @@ const RoomTypeDetail = () => {
     }).start();
   }, []);
 
+  const handleTabChange = (tab: 'info' | 'rooms') => {
+    setSelectedTab(tab);
+  };
+
+  const handleEditRoomType = () => {
+    console.log('Edit room type');
+  };
+
+  const handleSelectRoom = (roomId: string) => {
+    setSelectedRooms(
+      selectedRooms.includes(roomId)
+        ? selectedRooms.filter((id) => id !== roomId)
+        : [...selectedRooms, roomId]
+    );
+  };
+
   const renderHeader = () => (
-    <View className="bg-white p-4 shadow-sm">
-      <View className="flex-row items-start justify-between">
-        <View className="flex-1">
-          <View className="flex-row items-center gap-2">
-            <Text className="text-2xl font-bold">{roomTypeDetail.name}</Text>
-            <View
-              className={`rounded-full px-3 py-1 ${businessStatusColors[roomTypeDetail.status as unknown as BusinessStatus].background}`}
-            >
-              <Text
-                className={`text-sm font-bold ${businessStatusColors[roomTypeDetail.status as unknown as BusinessStatus].text}`}
-              >
-                {
-                  businessStatusNames[
-                  roomTypeDetail.status as unknown as BusinessStatus
-                  ]
-                }
-              </Text>
-            </View>
-          </View>
-          <Text className="mt-2 text-base text-gray-600">
-            {roomTypeDetail.description}
-          </Text>
-        </View>
-        <TouchableOpacity
-          className="rounded-full bg-blue-600 p-2 shadow-md"
-          onPress={() => console.log('Edit room type')}
-        >
-          <Ionicons name="pencil" size={20} color="white" />
-        </TouchableOpacity>
-      </View>
-
-      <View className="mt-2 flex-row items-center justify-between rounded-xl bg-gray-50 p-1">
-        <View className="flex-row rounded-xl bg-gray-50">
-          <TouchableOpacity
-            className={`flex-1 items-center rounded-lg border-2   p-2 ${selectedTab === 'info' ? ' border-gray-100 bg-white' : 'border-transparent bg-gray-50'}`}
-            onPress={() => setSelectedTab('info')}
-          >
-            <Text
-              className={`font-semibold ${selectedTab === 'info' ? 'text-blue-600' : 'text-gray-500'}`}
-            >
-              Information
-            </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            className={`flex-1 items-center rounded-lg border-2   p-2 ${selectedTab === 'rooms' ? 'border-gray-100 bg-white' : 'border-transparent bg-gray-50'}`}
-            onPress={() => setSelectedTab('rooms')}
-          >
-            <Text
-              className={`font-semibold ${selectedTab === 'rooms' ? 'text-blue-600' : 'text-gray-600'}`}
-            >
-              Rooms
-              {`Rooms (${roomTypeDetail.roomCount ?? 0})`}
-            </Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    </View>
+    <RoomTypeHeader
+      name={roomTypeDetail.name}
+      description={roomTypeDetail.description}
+      status={roomTypeDetail.status as unknown as BusinessStatus}
+      selectedTab={selectedTab as 'info' | 'rooms'}
+      roomCount={roomTypeDetail.roomCount}
+      onTabChange={handleTabChange}
+      onEdit={handleEditRoomType}
+    />
   );
 
   const renderContent = () => {
     if (selectedTab === 'info') {
       const images = [1, 2, 3].map(
         (_, index) => `https://picsum.photos/400/300?random=${index}`
-      );
-
-      console.log(
-        'roomTypeDetail.price.toLocaleString()',
-        roomTypeDetail.price.toLocaleString()
       );
 
       return (
@@ -172,7 +163,7 @@ const RoomTypeDetail = () => {
           </View>
 
           <TouchableOpacity
-            className="mt-8 rounded-full bg-red-500 p-3"
+            className="mb-8 rounded-full bg-red-500 p-3"
             onPress={() => {
               // TODO: Add confirmation dialog and remove logic
               console.log('Remove room type');
@@ -182,6 +173,132 @@ const RoomTypeDetail = () => {
               Remove Room Type
             </Text>
           </TouchableOpacity>
+        </View>
+      );
+    }
+
+    if (selectedTab === 'rooms') {
+      const rooms: Room[] = [
+        {
+          id: '1',
+          number: 'P.205',
+          type: 'Single',
+          booking_status: RoomBookingStatus.AVAILABLE,
+          price: roomTypeDetail.price,
+          areaId: 1,
+          occupants: [],
+          status: 1,
+        },
+        {
+          id: '2',
+          number: 'P.206',
+          type: 'Single',
+          booking_status: RoomBookingStatus.OCCUPIED,
+          price: roomTypeDetail.price,
+          areaId: 1,
+          occupants: [],
+          status: 1,
+        },
+      ];
+
+      return (
+        <View className="">
+          <View className="flex h-[70%] flex-col justify-between gap-2 bg-white p-2">
+            <RoomList
+              rooms={rooms}
+              selectedRooms={selectedRooms}
+              onSelectRoom={handleSelectRoom}
+            />
+
+            <View className="flex-row justify-between gap-2 border-t border-gray-100 bg-white p-4">
+              <TouchableOpacity
+                className={`flex-1 rounded-xl border border-gray-200 p-3 ${selectedRooms.length === 0 ? 'opacity-50' : ''}`}
+                onPress={() => setSelectedRooms([])}
+                disabled={selectedRooms.length === 0}
+              >
+                <Text className="text-center text-base font-semibold text-gray-700">
+                  Clear Selection
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                className={`flex-1 rounded-xl bg-blue-600 p-3 ${selectedRooms.length === 0 ? 'opacity-50' : ''}`}
+                onPress={() => setShowTransferModal(true)}
+                disabled={selectedRooms.length === 0}
+              >
+                <Text className="text-center text-base font-semibold text-white">
+                  {'Move Rooms' +
+                    (selectedRooms.length ? ` (${selectedRooms.length})` : '')}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          {showTransferModal && (
+            <View className="absolute inset-0 flex-1 items-center justify-center bg-black/50">
+              <View className="m-4 w-full max-w-md rounded-xl bg-white p-4">
+                <View className="mb-4 flex-row items-center justify-between">
+                  <Text className="text-xl font-semibold text-gray-900">
+                    Move to Room Type
+                  </Text>
+                  <TouchableOpacity onPress={() => setShowTransferModal(false)}>
+                    <Ionicons name="close" size={24} color="#6B7280" />
+                  </TouchableOpacity>
+                </View>
+
+                <Text className="mb-4 text-sm text-gray-600">
+                  Select a room type to move {selectedRooms.length} room(s)
+                </Text>
+
+                <ScrollView className="max-h-96">
+                  <View className="space-y-2">
+                    {roomTypes.map((type) => (
+                      <TouchableOpacity
+                        key={type.id}
+                        className={`flex-row items-center rounded-lg border p-3 ${selectedRoomType === type.id ? 'border-blue-600 bg-blue-50' : 'border-gray-200'}`}
+                        onPress={() => setSelectedRoomType(type.id)}
+                      >
+                        <View className="mr-3 size-5 items-center justify-center rounded-full border-2 border-gray-400">
+                          {selectedRoomType === type.id && (
+                            <View className="size-3 rounded-full bg-blue-600" />
+                          )}
+                        </View>
+                        <View className="flex-1">
+                          <Text className="text-base font-medium text-gray-900">
+                            {type.name}
+                          </Text>
+                          <Text className="text-sm text-gray-500">
+                            {type.standardCapacity} - {type.maxCapacity} người •{' '}
+                            {type.roomCount} phòng
+                          </Text>
+                        </View>
+                        <Text className="text-sm font-medium text-blue-600">
+                          đ{type.price.toLocaleString()}
+                        </Text>
+                      </TouchableOpacity>
+                    ))}
+                  </View>
+                </ScrollView>
+
+                <View className="mt-4 border-t border-gray-200 pt-4">
+                  <TouchableOpacity
+                    className={`w-full rounded-lg bg-blue-600 p-4 ${!selectedRoomType ? 'opacity-50' : ''}`}
+                    disabled={!selectedRoomType}
+                    onPress={() => {
+                      // TODO: Implement room transfer logic
+                      console.log('Transfer rooms to type:', selectedRoomType);
+                      setShowTransferModal(false);
+                      setSelectedRooms([]);
+                      setSelectedRoomType(null);
+                    }}
+                  >
+                    <Text className="text-center text-base font-semibold text-white">
+                      Confirm Move
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </View>
+          )}
         </View>
       );
     }
@@ -211,10 +328,8 @@ const RoomTypeDetail = () => {
           ],
         }}
       >
-        <ScrollView>
-          {renderHeader()}
-          {renderContent()}
-        </ScrollView>
+        <View>{renderHeader()}</View>
+        {renderContent()}
       </Animated.View>
     </View>
   );

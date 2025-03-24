@@ -2,11 +2,10 @@ import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
-import { OccupantCard } from '../../room-diagram/components/occupant-card';
-import { roomStatusNames } from '../../room-diagram/constants';
-import { roomStatusColors } from '../../room-diagram/constants/colors';
-import { RoomStatus } from '../../room-diagram/types';
+import { RoomBookingStatusColors } from '@/app/room-diagram/constants/colors';
+
 import { type Room } from '../../room-diagram/types/room';
+import { RoomStatusInfo } from './room-status-info';
 
 interface RoomCardProps {
   room: Room;
@@ -14,27 +13,7 @@ interface RoomCardProps {
 }
 
 export const RoomCard: React.FC<RoomCardProps> = ({ room, onPress }) => {
-  const colorRoom = roomStatusColors[room.status];
-
-  const renderOccupants = () => {
-    if (room.status !== RoomStatus.OCCUPIED || !room.occupants?.length) {
-      return null;
-    }
-
-    const adultCount = room.occupants.filter((o) => !o.isChild).length;
-    const childCount = room.occupants.filter((o) => o.isChild).length;
-
-    return (
-      <View className="h-full flex-row items-center gap-2">
-        <OccupantCard
-          count={adultCount}
-          size={18}
-          iconName={'person-outline'}
-        />
-        <OccupantCard count={childCount} size={18} iconName={'child-care'} />
-      </View>
-    );
-  };
+  const colorRoom = RoomBookingStatusColors[room.booking_status];
 
   return (
     <TouchableOpacity
@@ -42,14 +21,12 @@ export const RoomCard: React.FC<RoomCardProps> = ({ room, onPress }) => {
       onPress={() => onPress?.(room)}
     >
       <View className="w-[70%] items-start gap-2">
-        <View className="flex-row items-start gap-2">
-          <View className={`rounded-lg px-2 py-1 ${colorRoom.background}`}>
-            <Text className={`px-2 text-sm ${colorRoom.text}`}>
-              {roomStatusNames[room.status]}
-            </Text>
-          </View>
-          {renderOccupants()}
-        </View>
+        <RoomStatusInfo
+          booking_status={room.booking_status}
+          occupants={room.occupants}
+          isShowOccupants={true}
+          height={32}
+        />
 
         <View className="flex-row gap-2">
           <Text className="text-lg font-semibold text-gray-800">

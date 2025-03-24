@@ -1,8 +1,8 @@
 import React from 'react';
 import { ScrollView, Text, TouchableOpacity } from 'react-native';
 
-import { roomStatusNames, statusData } from '../constants';
-import { RoomStatus, type StatusFilterProps } from '../types';
+import { roomBookingStatusNames, statusData } from '../constants';
+import { RoomBookingStatus, type StatusFilterProps } from '../types';
 
 export const StatusFilter: React.FC<StatusFilterProps> = ({
   selectedStatuses,
@@ -21,7 +21,7 @@ export const StatusFilter: React.FC<StatusFilterProps> = ({
     >
       {filteredStatusData.map((status) => {
         const isSelected = selectedStatuses.includes(status.status);
-        const isAllStatus = status.status === RoomStatus.ALL;
+        const isAllStatus = status.status === RoomBookingStatus.ALL;
 
         return (
           <TouchableOpacity
@@ -30,7 +30,7 @@ export const StatusFilter: React.FC<StatusFilterProps> = ({
             onPress={() => onToggleStatus(status.status)}
           >
             <Text className={`${isSelected ? 'text-white' : 'text-gray-700'}`}>
-              {roomStatusNames[status.status]}
+              {roomBookingStatusNames[status.status]}
             </Text>
 
             <Text

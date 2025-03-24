@@ -1,4 +1,4 @@
-export enum RoomStatus {
+export enum RoomBookingStatus {
   ALL = -1,
   AVAILABLE = 1,
   OCCUPIED = 2,
@@ -8,13 +8,19 @@ export enum RoomStatus {
   OUT_OF_SERVICE = 6,
 }
 
+export enum RoomStatus {
+  ALL = -1,
+  IN_ACTIVE = 1,
+  ACTIVE = 2,
+}
+
 export interface Area {
   id: number;
   name: string;
 }
 
-export interface RoomStatusData {
-  status: RoomStatus;
+export interface RoomBookingStatusData {
+  status: RoomBookingStatus;
   count: number;
 }
 
@@ -27,9 +33,9 @@ export interface AreaDropdownProps {
 }
 
 export interface StatusFilterProps {
-  selectedStatuses: RoomStatus[];
-  onToggleStatus: (status: RoomStatus) => void;
-  allowedStatuses?: RoomStatus[];
+  selectedStatuses: RoomBookingStatus[];
+  onToggleStatus: (status: RoomBookingStatus) => void;
+  allowedStatuses?: RoomBookingStatus[];
 }
 
 export interface SearchBarProps {

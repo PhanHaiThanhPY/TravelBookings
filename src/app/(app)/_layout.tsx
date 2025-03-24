@@ -74,52 +74,6 @@ export default function TabLayout() {
         }}
       />
 
-      {/* <Tabs.Screen
-        name="style"
-        options={{
-          title: 'Sơ đồ phòng',
-          tabBarIcon: ({ focused }) => (
-            <View className="items-center pt-2">
-              {focused && (
-                <View className="absolute h-1 w-20 rounded-md bg-blue-600" />
-              )}
-              <IconDiagram isActive={focused} />
-            </View>
-          ),
-          headerRight: () => <CreateNewPostLink />,
-          tabBarButtonTestID: 'style-tab',
-          tabBarLabelStyle: {
-            fontSize: 14,
-            marginVertical: 5,
-          },
-          tabBarActiveTintColor: '#0866FF', // Màu khi tab được chọn
-          tabBarInactiveTintColor: '#6B7280', // Màu khi tab không được chọn
-        }}
-      /> */}
-
-      {/* <Tabs.Screen
-        name="settings"
-        options={{
-          title: 'Booking',
-          tabBarIcon: ({ focused }) => (
-            <View className="items-center pt-2">
-              {focused && (
-                <View className="absolute h-1 w-20 rounded-md bg-blue-600" />
-              )}
-              <IconBooking isActive={focused} />
-            </View>
-          ),
-          headerRight: () => <CreateNewPostLink />,
-          tabBarButtonTestID: 'settings-tab',
-          tabBarLabelStyle: {
-            fontSize: 14,
-            marginVertical: 5,
-          },
-          tabBarActiveTintColor: '#0866FF', // Màu khi tab được chọn
-          tabBarInactiveTintColor: '#6B7280', // Màu khi tab không được chọn
-        }}
-      /> */}
-
       <Tabs.Screen
         name="menu"
         options={{
@@ -133,7 +87,7 @@ export default function TabLayout() {
             </View>
           ),
           headerRight: () => <CreateNewPostLink />,
-          tabBarButtonTestID: 'settings-tab',
+          tabBarButtonTestID: 'menu-tab',
           tabBarLabelStyle: {
             fontSize: 14,
             marginVertical: 5,

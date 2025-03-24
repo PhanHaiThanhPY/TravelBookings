@@ -6,8 +6,8 @@ import {
   type BusinessStatus,
   businessStatusColors,
   businessStatusNames,
-} from '../../room-diagram/types/business';
-import { type IRoomType } from './types';
+} from '../../../room-diagram/types/business';
+import { type IRoomType } from '../types';
 
 interface RoomTypeCardProps {
   name: string;
