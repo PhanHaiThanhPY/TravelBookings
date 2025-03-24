@@ -74,7 +74,7 @@ export default function TabLayout() {
         }}
       />
 
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name="style"
         options={{
           title: 'Sơ đồ phòng',
@@ -95,9 +95,9 @@ export default function TabLayout() {
           tabBarActiveTintColor: '#0866FF', // Màu khi tab được chọn
           tabBarInactiveTintColor: '#6B7280', // Màu khi tab không được chọn
         }}
-      />
+      /> */}
 
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name="settings"
         options={{
           title: 'Booking',
@@ -118,7 +118,7 @@ export default function TabLayout() {
           tabBarActiveTintColor: '#0866FF', // Màu khi tab được chọn
           tabBarInactiveTintColor: '#6B7280', // Màu khi tab không được chọn
         }}
-      />
+      /> */}
 
       <Tabs.Screen
         name="menu"

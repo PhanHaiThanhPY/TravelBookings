@@ -2,6 +2,8 @@ import React from 'react';
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { router, Stack } from 'expo-router';
+import { IconEmpty } from '@/components/ui/icons/icon-empty';
+import EmptyCustom from '@/components/custom/empty-custom';
 
 const CreateBookingScreen = () => {
   return (
@@ -53,7 +55,7 @@ const CreateBookingScreen = () => {
         {/* Thông tin phòng */}
         <View className=" flex flex-col gap-3 p-4">
           <Text className="text-xl font-bold">Thông tin phòng</Text>
-          <View className="bg-gray-50 rounded-lg ">
+          {/* <View className="bg-gray-50 rounded-lg ">
             <View className="flex-row justify-between items-center">
               <View className="flex-row items-center">
                 <Ionicons
@@ -83,8 +85,14 @@ const CreateBookingScreen = () => {
                 Dự kiến 1 đêm • đ1,650,000 x 1 đêm
               </Text>
             </View>
-          </View>
-          <TouchableOpacity className="flex-row border items-center justify-center border-[#0866FF] rounded-lg py-3  ">
+          </View> */}
+          <EmptyCustom />
+          <TouchableOpacity
+            onPress={() => {
+              router.push('/room-diagram/create-booking/room-selection-screen');
+            }}
+            className="flex-row border items-center justify-center border-[#0866FF] rounded-lg py-3  "
+          >
             <Ionicons name="add" size={20} color="#0866FF" className="mr-3" />
             <Text className="text-[#0866FF] font-bold text-base">
               Thêm phòng

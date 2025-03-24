@@ -49,6 +49,10 @@ export const schemaCreateCustomer = z
     ward_id: z
       .string({ required_error: 'Ward ID là bắt buộc' })
       .nonempty('Vui lòng chọn Phường/Xã'),
+
+    customer_type_id: z
+      .string({ required_error: 'Customer Type ID là bắt buộc' })
+      .nonempty('Vui lòng chọn Loại khách hàng'),
   })
   .superRefine((data: any, ctx: any) => {
     if (!data.city_id && data.district_id) {

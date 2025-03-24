@@ -65,6 +65,7 @@ type OptionsProps = {
   onSelect: (option: OptionType) => void;
   value?: string | number;
   testID?: string;
+  titleHeader?: string;
 };
 
 function keyExtractor(item: OptionType) {
@@ -72,7 +73,7 @@ function keyExtractor(item: OptionType) {
 }
 
 export const Options = React.forwardRef<BottomSheetModal, OptionsProps>(
-  ({ options, onSelect, value, testID }, ref) => {
+  ({ options, onSelect, value, testID, titleHeader }, ref) => {
     const height = options.length * 70 + 100;
     const snapPoints = React.useMemo(() => [height], [height]);
     const { colorScheme } = useColorScheme();
@@ -100,6 +101,9 @@ export const Options = React.forwardRef<BottomSheetModal, OptionsProps>(
           backgroundColor: isDark ? colors.neutral[800] : colors.white,
         }}
       >
+        <View className="flex items-center justify-center p-2">
+          <Text className="text-center text-lg font-bold">{titleHeader}</Text>
+        </View>
         <List
           data={options}
           keyExtractor={keyExtractor}
