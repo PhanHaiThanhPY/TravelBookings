@@ -195,21 +195,21 @@ export const BookingList: React.FC<BookingListProps> = () => {
             </Text>
           </View>
           <View className="my-2">
-            <View className="mb-2 flex-row  gap-2">
+            <View className="mb-2 flex-row items-center gap-2">
               <MaterialIcons name="people" size={16} color="#4B5563" />
-              <Text className="ml-2 flex-1 text-base font-medium text-gray-900">
+              <Text className="ml-2 flex-1 text-lg font-semibold ">
                 {'Khách lẻ'}
               </Text>
             </View>
             <View className="mb-2 flex-row  gap-2">
               <MaterialIcons name="meeting-room" size={16} color="#4B5563" />
-              <Text className="ml-2 flex-1 text-base font-medium text-gray-900">
+              <Text className="ml-2 flex-1 text-base font-normal ">
                 {booking.roomNumber + ' - ' + booking.roomType}
               </Text>
             </View>
             <View className="mb-2 flex-row  gap-2">
               <MaterialIcons name="access-time" size={16} color="#4B5563" />
-              <Text className="ml-2 flex-1 text-base font-medium text-gray-900">
+              <Text className="ml-2 flex-1 text-base font-normal ">
                 {booking.checkIn} -&gt; {booking.checkOut}
               </Text>
             </View>
@@ -235,7 +235,7 @@ export const BookingList: React.FC<BookingListProps> = () => {
             ) : (
               <View className="flex-row items-center gap-2 rounded-full bg-gray-50 px-3 py-1.5">
                 <MaterialIcons name="payments" size={20} color="#4B5563" />
-                <Text className="text-sm font-medium text-gray-600">
+                <Text className="text-base font-medium ">
                   đ{booking.amount.toLocaleString('vi-VN')}
                 </Text>
               </View>

@@ -6,8 +6,8 @@ import { ScrollView, TouchableOpacity, View } from 'react-native';
 import { SearchBar } from '../../room-diagram/components/search-bar';
 import { BusinessStatus } from '../../room-diagram/types/business';
 import { BusinessFilter } from './business-filter';
-import { roomTypes } from './data/room-types';
 import { RoomTypeCard } from './components/room-type-card';
+import { roomTypes } from './data/room-types';
 
 const RoomType = () => {
   const [searchQuery, setSearchQuery] = useState('');

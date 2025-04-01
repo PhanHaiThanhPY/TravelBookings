@@ -1,191 +1,27 @@
 import { MaterialIcons } from '@expo/vector-icons';
-import { Stack, useLocalSearchParams } from 'expo-router';
-import React, { memo } from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { router, Stack, useLocalSearchParams } from 'expo-router';
+import React, { useState } from 'react';
+import {
+  SafeAreaView,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
-import { RoomStatusInfo } from '@/app/menu/components/room-status-info';
-import { type RoomBookingStatus } from '@/app/room-diagram/types';
+import { type BookingItem, formatCurrency, TAB_TYPE } from '../utils';
+import { BookingHistory } from './booking-history';
+import { PaymentInfo } from './payment-info';
+import ServiceInfo from './service-info';
 
-type ServiceInfo = {
-  name: string;
-  quantity: number;
-  price: number;
-};
+export const BookingDetail: React.FC = () => {
+  const params = useLocalSearchParams() as unknown as BookingItem as any;
+  const [selectedTab, setSelectedTab] = useState('info');
+  const countOrder = 1;
 
-type PaymentInfo = {
-  total: number;
-  paid: number;
-  discount: number;
-  note: string;
-};
-
-interface BookingItem extends PaymentInfo {
-  id: string;
-  roomNumber: string;
-  roomType: string;
-  status: number;
-  checkIn: string;
-  checkOut: string;
-  customerName: string;
-  amount: number;
-  booking_status: RoomBookingStatus;
-  created_at: string;
-  payment_status: number;
-  guests: {
-    adults: number;
-    children: number;
-    infants: number;
+  const handleTabChange = (tab: (typeof TAB_TYPE)[keyof typeof TAB_TYPE]) => {
+    setSelectedTab(tab as any);
   };
-  services: ServiceInfo[];
-}
-
-const CustomerInfo = memo(
-  ({
-    customerName,
-    guests,
-  }: {
-    customerName: string;
-    guests: BookingItem['guests'];
-  }) => (
-    <View className="mb-4 flex-row items-center gap-2">
-      <MaterialIcons name="people" size={20} color="#4B5563" />
-      <Text className="text-lg font-medium text-gray-900">{customerName}</Text>
-      <Text className="ml-auto text-sm text-gray-600">
-        {/* {guests.adults} người lớn & {guests.children} trẻ em & {guests.infants}{' '} */}
-        giấy tờ
-      </Text>
-    </View>
-  )
-);
-
-const RoomInfo = memo(
-  ({
-    roomNumber,
-    roomType,
-    checkIn,
-    checkOut,
-  }: {
-    roomNumber: string;
-    roomType: string;
-    checkIn: string;
-    checkOut: string;
-  }) => (
-    <>
-      <View className="mb-4 flex-row items-center gap-2">
-        <MaterialIcons name="meeting-room" size={20} color="#4B5563" />
-        <Text className="text-lg font-medium text-gray-900">
-          {roomNumber} - {roomType}
-        </Text>
-      </View>
-
-      <View className="flex-row items-center gap-2">
-        <MaterialIcons name="access-time" size={20} color="#4B5563" />
-        <Text className="text-lg font-medium text-gray-900">
-          {checkIn} -&gt; {checkOut}
-        </Text>
-      </View>
-    </>
-  )
-);
-
-const ServiceInfo = () => (
-  <View className="space-y-2">
-    <View className="flex-row items-center gap-2">
-      <MaterialIcons name="room-service" size={20} color="#4B5563" />
-      <Text className="text-lg font-medium text-gray-900">
-        Thông tin dịch vụ
-      </Text>
-    </View>
-    {/* {services.map((service, index) => (
-      <View key={index} className="flex-row items-center justify-between">
-        <Text className="text-base text-gray-700">{service.name}</Text>
-        <View className="flex-row items-center gap-4">
-          <Text className="text-sm text-gray-600">x{service.quantity}</Text>
-          <Text className="text-base font-medium text-gray-900">
-            {new Intl.NumberFormat('vi-VN', {
-              style: 'currency',
-              currency: 'VND',
-            }).format(service.price)}
-          </Text>
-        </View>
-      </View> */}
-    {/* ))} */}
-  </View>
-);
-
-const PaymentInfo = memo(({ payment }: { payment: PaymentInfo }) => (
-  <View className="space-y-2">
-    <View className="flex-row items-center justify-between">
-      <Text className="text-base text-gray-700">Tổng tiền hàng</Text>
-      <Text className="text-base font-medium text-gray-900">
-        {new Intl.NumberFormat('vi-VN', {
-          style: 'currency',
-          currency: 'VND',
-        }).format(payment.total)}
-      </Text>
-    </View>
-    <View className="flex-row items-center justify-between">
-      <Text className="text-base text-gray-700">Khách đã trả</Text>
-      <Text className="text-base font-medium text-green-600">
-        -
-        {new Intl.NumberFormat('vi-VN', {
-          style: 'currency',
-          currency: 'VND',
-        }).format(payment.paid)}
-      </Text>
-    </View>
-    <View className="flex-row items-center justify-between">
-      <Text className="text-base text-gray-700">Giảm giá</Text>
-      <Text className="text-base font-medium text-red-600">
-        -
-        {new Intl.NumberFormat('vi-VN', {
-          style: 'currency',
-          currency: 'VND',
-        }).format(payment.discount)}
-      </Text>
-    </View>
-    {payment.note && (
-      <View className="mt-2">
-        <Text className="text-base text-gray-700">Ghi chú:</Text>
-        <Text className="text-sm text-gray-600">{payment.note}</Text>
-      </View>
-    )}
-  </View>
-));
-
-const PaymentStatus = memo(
-  ({ status, amount }: { status: number; amount: number }) => {
-    if (status === 2) {
-      return (
-        <View className="flex-row items-center gap-2 rounded-full bg-green-50 px-3 py-1.5">
-          <MaterialIcons name="check" size={20} color="#10B981" />
-          <Text className="text-sm font-medium text-green-600">
-            Đã thanh toán
-          </Text>
-        </View>
-      );
-    }
-
-    function formatCurrency(amount: number): React.ReactNode {
-      return new Intl.NumberFormat('vi-VN', {
-        style: 'currency',
-        currency: 'VND',
-      }).format(amount);
-    }
-
-    return (
-      <View className="flex-row items-center gap-2 rounded-full bg-gray-50 px-3 py-1.5">
-        <MaterialIcons name="payments" size={20} color="#4B5563" />
-        <Text className="text-sm font-medium text-gray-600">
-          {formatCurrency(amount)}
-        </Text>
-      </View>
-    );
-  }
-);
-
-export const BookingDetail = () => {
-  const params = useLocalSearchParams() as unknown as BookingItem;
 
   return (
     <>
@@ -195,60 +31,275 @@ export const BookingDetail = () => {
           headerShown: true,
         }}
       />
-      <ScrollView className="flex-1 gap-4 bg-white p-4">
+
+      <SafeAreaView style={{ flex: 1 }}>
         {/* Header Section */}
-        <View className="flex-row items-center justify-between rounded-lg border border-gray-200 p-4">
-          <View className="flex-row items-center gap-2">
-            <MaterialIcons name="house" size={24} />
-            <Text className="text-lg font-medium">Booking ID: {params.id}</Text>
+        <View className="mt-2 flex-row items-center justify-between rounded-xl bg-gray-50 p-2">
+          <View className="flex-row rounded-xl bg-gray-50">
+            <TouchableOpacity
+              className={`flex-1 items-center rounded-lg border-2 p-2 ${selectedTab === TAB_TYPE.INFO ? 'border-gray-100 bg-white' : 'border-transparent bg-gray-50'}`}
+              onPress={() => handleTabChange(TAB_TYPE.INFO)}
+            >
+              <Text
+                className={`font-medium ${selectedTab === TAB_TYPE.INFO ? 'text-blue-600' : 'text-gray-500'}`}
+              >
+                Information
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              className={`flex-1 items-center rounded-lg border-2 p-2 ${selectedTab === TAB_TYPE.HISTORY ? 'border-gray-100 bg-white' : 'border-transparent bg-gray-50'}`}
+              onPress={() => handleTabChange(TAB_TYPE.HISTORY)}
+            >
+              <Text
+                className={`font-medium ${selectedTab === TAB_TYPE.HISTORY ? 'text-blue-600' : 'text-gray-600'}`}
+              >
+                {`Lịch sử hoá đơn (${countOrder})`}
+              </Text>
+            </TouchableOpacity>
           </View>
-          <Text className="text-base text-gray-500">{params.created_at}</Text>
         </View>
 
-        {/* Customer & Room Info Section */}
-        <View className="space-y-4 rounded-lg border border-gray-200 p-4">
-          <View className="flex-row items-center justify-between">
-            <RoomStatusInfo
-              booking_status={params.booking_status}
-              occupants={[]}
-              isShowOccupants={false}
-              height={32}
-            />
-            <PaymentStatus
-              status={params.payment_status}
-              amount={params.amount}
-            />
+        {selectedTab === TAB_TYPE.HISTORY ? (
+          <BookingHistory />
+        ) : (
+          <ScrollView className="flex bg-gray-100 p-2">
+            <View className="flex-1 gap-4 space-y-4 pb-20">
+              {/* Customer & Room Info Section */}
+              <View className="flex-1 gap-2 rounded-lg border border-gray-200 bg-white p-4">
+                <Text className="text-xl font-semibold text-gray-900">
+                  Thông tin khách hàng
+                </Text>
+
+                <View className="mt-2 flex-1 gap-2">
+                  {/* Customer Info */}
+                  <TouchableOpacity
+                    className="flex-row items-center gap-4"
+                    onPress={() => {
+                      console.log('view customer details');
+                    }}
+                  >
+                    <MaterialIcons name="person" size={24} color="#4B5563" />
+                    <View className="flex-1 items-start space-x-2">
+                      <Text className="text-base text-black">
+                        {params?.customerName || 'N/A'}
+                      </Text>
+                      <Text className="text-base text-black">
+                        {params?.phone || '0362797727'}
+                      </Text>
+                    </View>
+                    <MaterialIcons
+                      name="arrow-forward-ios"
+                      size={20}
+                      color="#4B5563"
+                    />
+                  </TouchableOpacity>
+
+                  {/* create a border bot  */}
+                  <View className="h-0.5 bg-gray-200" />
+
+                  {/* Guest Info */}
+                  <TouchableOpacity className="flex-row items-center gap-4">
+                    <MaterialIcons name="people" size={24} color="#4B5563" />
+                    <View className="flex-1 items-start space-x-2">
+                      <Text className="text-base text-black">
+                        {`${params?.guests?.adults || 0} người lớn & ${params?.guests?.children || 0} trẻ em & ${params?.guests?.infants || 0} giấy tờ`}
+                      </Text>
+                    </View>
+                    <MaterialIcons
+                      name="arrow-forward-ios"
+                      size={20}
+                      color="#4B5563"
+                    />
+                  </TouchableOpacity>
+                </View>
+              </View>
+
+              {/* Rooms Info Section */}
+              <View className="flex-1 gap-2 rounded-lg border border-gray-200 bg-white p-4">
+                <Text className="text-xl font-semibold text-gray-900">
+                  {`Thông tin phòng (${params?.rooms?.length || 0})`}
+                </Text>
+
+                <View className="mt-2 flex-1 gap-4">
+                  {/* Room Info */}
+                  <View className="flex-row items-center gap-4">
+                    <MaterialIcons name="hotel" size={24} color="#4B5563" />
+                    <View className="flex-1 items-start space-y-2">
+                      <View className="flex w-full flex-row items-center justify-between">
+                        <View className="flex-col items-start">
+                          <Text className="text-base font-medium text-black">
+                            {`${params?.roomNumber || 'N/A'} - Tầng ${Math.floor(Number(params?.roomNumber?.slice(1)) / 100) || 'N/A'}`}
+                          </Text>
+                          <View className="flex-row items-center rounded-full bg-green-100 px-4 py-1.5">
+                            <Text className="text-sm font-medium text-green-600">
+                              {'Đã ở 2 phút'}
+                            </Text>
+                          </View>
+                        </View>
+                        <MaterialIcons
+                          name="change-circle"
+                          size={24}
+                          color="#4B5563"
+                          onPress={() => {
+                            console.log('change room');
+                          }}
+                        />
+                      </View>
+                      <Text className="text-base text-gray-600">
+                        {params?.roomType || 'N/A'} 1 giường đôi 2 người
+                      </Text>
+                      <View className="flex-1 items-start space-y-2">
+                        <Text className="text-base text-black">
+                          {`${params?.checkIn || 'N/A'}`} -&gt;{' '}
+                          {`${params?.checkOut || 'N/A'}`}
+                        </Text>
+                      </View>
+
+                      <View className="flex-row flex-wrap items-start">
+                        <Text className="text-base text-black">
+                          {`Thời gian dự kiến: ${2} ngày`}
+                          {' | '}
+                        </Text>
+                        <Text className="text-base text-blue-700">
+                          {formatCurrency(params?.amount) || '0'}
+                        </Text>
+                        <Text className="text-base text-black">x 1 đêm</Text>
+                      </View>
+                    </View>
+                  </View>
+                  <View className="h-0.5 bg-gray-200" />
+
+                  <View className="flex-row items-center gap-4">
+                    <MaterialIcons name="hotel" size={24} color="#4B5563" />
+                    <View className="flex-1 items-start space-y-2">
+                      <View className="flex w-full flex-row items-center justify-between">
+                        <View className="flex-col items-start">
+                          <Text className="text-base font-medium text-black">
+                            {`${params?.roomNumber || 'N/A'} - Tầng ${Math.floor(Number(params?.roomNumber?.slice(1)) / 100) || 'N/A'}`}
+                          </Text>
+                          <View className="flex-row items-center rounded-full bg-green-100 px-4 py-1.5">
+                            <Text className="text-sm font-medium text-green-600">
+                              {'Đã ở 2 phút'}
+                            </Text>
+                          </View>
+                        </View>
+                        <MaterialIcons
+                          name="change-circle"
+                          size={24}
+                          color="#4B5563"
+                          onPress={() => {
+                            console.log('change room');
+                          }}
+                        />
+                      </View>
+                      <Text className="text-base text-gray-600">
+                        {params?.roomType || 'N/A'} 1 giường đôi 2 người
+                      </Text>
+                      <View className="flex-1 items-start space-y-2">
+                        <Text className="text-base text-black">
+                          {`${params?.checkIn || 'N/A'}`} -&gt;{' '}
+                          {`${params?.checkOut || 'N/A'}`}
+                        </Text>
+                      </View>
+
+                      <View className="flex-row flex-wrap items-start">
+                        <Text className="text-base text-black">
+                          {`Thời gian dự kiến: ${2} ngày`}
+                          {' | '}
+                        </Text>
+                        <Text className="text-base text-blue-700">
+                          {formatCurrency(params?.amount) || '0'}
+                        </Text>
+                        <Text className="text-base text-black">x 1 đêm</Text>
+                      </View>
+                    </View>
+                  </View>
+                  <View className="h-0.5 bg-gray-200" />
+                </View>
+              </View>
+
+              {/* Service Info Section */}
+              <View className="rounded-lg border border-gray-200 bg-white p-4">
+                <ServiceInfo extendedInfo={params?.services || []} />
+              </View>
+
+              {/* Payment Info Section */}
+              <View className="rounded-lg border border-gray-200 bg-white p-4">
+                <PaymentInfo
+                  payment={{
+                    total: params.total,
+                    paid: params.paid,
+                    discount: params.discount,
+                    note: params.note,
+                  }}
+                />
+              </View>
+            </View>
+          </ScrollView>
+        )}
+
+        {/* Footer Section */}
+        <View className="m-2 flex-col gap-2 bg-white">
+          <View className="flex-row items-center justify-between gap-2 p-2 ">
+            <Text className="text-lg font-semibold text-gray-600">
+              Tổng thanh toán
+            </Text>
+            <TouchableOpacity
+              className="flex-row items-center gap-2"
+              onPress={() => {
+                const rooms = params.rooms?.map((room: any) => ({
+                  roomNumber: room.roomNumber,
+                  roomType: room.roomType,
+                  amount: room.amount,
+                  nights: 2, // Assuming 2 nights from the UI
+                }));
+
+                console.log('room', rooms);
+
+                router.push({
+                  pathname: '/booking/components/payment-screen',
+                  params: {
+                    total: params.total,
+                    rooms: JSON.stringify(rooms),
+                  },
+                });
+              }}
+            >
+              <Text className="text-xl font-bold text-blue-500">
+                {formatCurrency(params?.total)}
+              </Text>
+              {/* icon > */}
+              <MaterialIcons
+                name="arrow-forward-ios"
+                size={20}
+                color="#4B5563"
+              />
+            </TouchableOpacity>
           </View>
-          <CustomerInfo
-            customerName={params.customerName}
-            guests={params.guests}
-          />
-          <RoomInfo
-            roomNumber={params.roomNumber}
-            roomType={params.roomType}
-            checkIn={params.checkIn}
-            checkOut={params.checkOut}
-          />
-        </View>
 
-        {/* Service Info Section */}
-        <View className="rounded-lg border border-gray-200 p-4">
-          <ServiceInfo services={params.services} />
+          <View className="flex-row items-center justify-between gap-4">
+            <TouchableOpacity
+              className="flex-1 items-center rounded-xl bg-red-50 p-2"
+              onPress={() => { }}
+            >
+              <Text className="text-xl font-semibold text-red-600">
+                Từ chối
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              className="flex-1 items-center rounded-xl bg-blue-700 p-2"
+              onPress={() => { }}
+            >
+              <Text className=" text-xl font-semibold text-white">
+                Xác nhận
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
-
-        {/* Payment Info Section */}
-        <View className="rounded-lg border border-gray-200 p-4">
-          <PaymentInfo
-            payment={{
-              total: params.total,
-              paid: params.paid,
-              discount: params.discount,
-              note: params.note,
-            }}
-          />
-        </View>
-      </ScrollView>
+      </SafeAreaView>
     </>
   );
 };
+
 export default BookingDetail;
