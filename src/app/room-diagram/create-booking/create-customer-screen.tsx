@@ -229,15 +229,6 @@ const CreateCustomerScreen = () => {
                 {/* Icon */}
                 <Ionicons name="document-outline" size={18} color="#3B82F6" />
               </TouchableOpacity>
-
-              {/* Image Preview */}
-              {imageUri && (
-                <Image
-                  source={{ uri: imageUri }}
-                  className="mt-4 w-40 h-40 rounded-lg"
-                  resizeMode="cover"
-                />
-              )}
             </View>
             <FloatingLabelInput
               control={control}

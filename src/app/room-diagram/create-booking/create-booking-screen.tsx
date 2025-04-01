@@ -1,22 +1,49 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+  FlatList,
+} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { router, Stack } from 'expo-router';
+import { router, Stack, useLocalSearchParams } from 'expo-router';
 import { IconEmpty } from '@/components/ui/icons/icon-empty';
 import EmptyCustom from '@/components/custom/empty-custom';
-
+import { styles } from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheetScrollable/BottomSheetFlashList';
+import RoomItem from './room-item';
+import { useRoom } from '@/lib/room';
+import Header from '@/components/custom/header';
+interface Room {
+  id: string;
+  name: string;
+  status: string;
+  type: string;
+  capacity: string;
+  price: number;
+  selected: boolean;
+}
 const CreateBookingScreen = () => {
+  const { rooms, setRooms } = useRoom();
+  const [selectedRooms, setSelectedRooms] = useState<Room[]>([]);
+  useEffect(() => {
+    setSelectedRooms(rooms as any[]);
+  }, [rooms]);
+
+  const renderSelectedRooms = () => {
+    if (selectedRooms.length === 0) {
+      return <EmptyCustom />;
+    }
+
+    return selectedRooms.map((item) => <RoomItem key={item.id} item={item} />);
+  };
+  const handleBackPress = () => {
+    setRooms([]);
+    router.back();
+  };
   return (
     <>
-      <Stack.Screen
-        options={{
-          headerShown: true,
-          title: 'Thêm đặt phòng',
-          headerStyle: { backgroundColor: '#fff' },
-          headerTintColor: '#000',
-          headerTitleStyle: { fontWeight: 'bold' },
-        }}
-      />
+      <Header title="Thêm đặt phòng" onBackPress={handleBackPress} />
       <ScrollView className="flex-1 bg-white">
         <View className=" flex flex-col gap-3 p-4 ">
           <Text className="text-xl font-bold ">Thông tin khách hàng</Text>
@@ -53,40 +80,9 @@ const CreateBookingScreen = () => {
         </View>
         <View className="w-full h-[10px] bg-gray-100"></View>
         {/* Thông tin phòng */}
-        <View className=" flex flex-col gap-3 p-4">
+        <View className=" flex flex-col p-4">
           <Text className="text-xl font-bold">Thông tin phòng</Text>
-          {/* <View className="bg-gray-50 rounded-lg ">
-            <View className="flex-row justify-between items-center">
-              <View className="flex-row items-center">
-                <Ionicons
-                  name="bed-outline"
-                  size={20}
-                  color="#374151"
-                  className="mr-3"
-                />
-                <Text className="text-sm font-bold mr-2">P205 • Tầng 2</Text>
-                <View className="flex-row items-center bg-red-100 rounded px-2 py-1">
-                  <Ionicons name="warning-outline" size={16} color="#EF4444" />
-                  <Text className="text-xs text-red-500 ml-1">Chưa dọn</Text>
-                </View>
-              </View>
-              <TouchableOpacity>
-                <Ionicons name="trash-outline" size={20} color="#EF4444" />
-              </TouchableOpacity>
-            </View>
-            <View className="ml-8">
-              <Text className="text-sm text-[#001416] mt-1">
-                Double/Phòng 01 giường đôi 2 người
-              </Text>
-              <Text className="text-sm text-[#001416] mt-1">
-                25/12/2024, 14:00 → 31/12/2024, 09:00
-              </Text>
-              <Text className="text-sm text-[#001416] mt-1">
-                Dự kiến 1 đêm • đ1,650,000 x 1 đêm
-              </Text>
-            </View>
-          </View> */}
-          <EmptyCustom />
+          {renderSelectedRooms()}
           <TouchableOpacity
             onPress={() => {
               router.push('/room-diagram/create-booking/room-selection-screen');

@@ -2,6 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
   <dict>
+ 
     <key>CADisableMinimumFrameDurationOnPhone</key>
     <true/>
     <key>CFBundleDevelopmentRegion</key>
@@ -72,6 +73,12 @@
     <key>UIStatusBarStyle</key>
     <string>UIStatusBarStyleDefault</string>
     <key>UISupportedInterfaceOrientations</key>
+    <key>NSCameraUsageDescription</key>
+<string>Ứng dụng của bạn cần quyền truy cập vào camera.</string>
+<key>NSPhotoLibraryUsageDescription</key>
+<string>Ứng dụng của bạn cần quyền truy cập vào thư viện ảnh.</string>
+<key>NSPhotoLibraryAddUsageDescription</key>
+<string>Ứng dụng của bạn cần quyền lưu trữ ảnh vào thư viện.</string>
     <array>
       <string>UIInterfaceOrientationPortrait</string>
       <string>UIInterfaceOrientationPortraitUpsideDown</string>
@@ -87,5 +94,6 @@
     <string>Automatic</string>
     <key>UIViewControllerBasedStatusBarAppearance</key>
     <false/>
+     
   </dict>
 </plist>

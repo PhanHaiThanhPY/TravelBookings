@@ -1,6 +1,6 @@
 import { Stack } from 'expo-router';
 import React from 'react';
-import { ScrollView, StatusBar, StyleSheet } from 'react-native';
+import { ScrollView, StatusBar, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import BookingCard from '../home/booking-card';
@@ -20,7 +20,7 @@ export default function HomeScreen() {
         barStyle="dark-content"
         showHideTransition="slide"
       />
-      <SafeAreaView style={{ flex: 1 }}>
+      <View style={{ flex: 1 }}>
         <ScrollView style={styles.container}>
           <Header />
           <BookingCard />
@@ -35,7 +35,7 @@ export default function HomeScreen() {
           <DonutChartSection />
           <LeaderBoard />
         </ScrollView>
-      </SafeAreaView>
+      </View>
     </>
   );
 }

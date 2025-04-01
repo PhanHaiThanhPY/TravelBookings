@@ -8,18 +8,18 @@ PODS:
   - EXJSONUtils (0.14.0)
   - EXManifests (0.15.7):
     - ExpoModulesCore
-  - Expo (52.0.38):
+  - Expo (52.0.41):
     - ExpoModulesCore
-  - expo-dev-client (5.0.13):
+  - expo-dev-client (5.0.15):
     - EXManifests
     - expo-dev-launcher
     - expo-dev-menu
     - expo-dev-menu-interface
     - EXUpdatesInterface
-  - expo-dev-launcher (5.0.30):
+  - expo-dev-launcher (5.0.31):
     - DoubleConversion
     - EXManifests
-    - expo-dev-launcher/Main (= 5.0.30)
+    - expo-dev-launcher/Main (= 5.0.31)
     - expo-dev-menu
     - expo-dev-menu-interface
     - ExpoModulesCore
@@ -45,7 +45,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - expo-dev-launcher/Main (5.0.30):
+  - expo-dev-launcher/Main (5.0.31):
     - DoubleConversion
     - EXManifests
     - expo-dev-launcher/Unsafe
@@ -74,7 +74,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - expo-dev-launcher/Unsafe (5.0.30):
+  - expo-dev-launcher/Unsafe (5.0.31):
     - DoubleConversion
     - EXManifests
     - expo-dev-menu
@@ -102,10 +102,10 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - expo-dev-menu (6.0.20):
+  - expo-dev-menu (6.0.21):
     - DoubleConversion
-    - expo-dev-menu/Main (= 6.0.20)
-    - expo-dev-menu/ReactNativeCompatibles (= 6.0.20)
+    - expo-dev-menu/Main (= 6.0.21)
+    - expo-dev-menu/ReactNativeCompatibles (= 6.0.21)
     - glog
     - hermes-engine
     - RCT-Folly (= 2024.01.01.00)
@@ -126,7 +126,7 @@ PODS:
     - ReactCommon/turbomodule/core
     - Yoga
   - expo-dev-menu-interface (1.9.3)
-  - expo-dev-menu/Main (6.0.20):
+  - expo-dev-menu/Main (6.0.21):
     - DoubleConversion
     - EXManifests
     - expo-dev-menu-interface
@@ -152,7 +152,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - expo-dev-menu/ReactNativeCompatibles (6.0.20):
+  - expo-dev-menu/ReactNativeCompatibles (6.0.21):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -173,7 +173,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - expo-dev-menu/SafeAreaView (6.0.20):
+  - expo-dev-menu/SafeAreaView (6.0.21):
     - DoubleConversion
     - ExpoModulesCore
     - glog
@@ -195,7 +195,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - expo-dev-menu/Vendored (6.0.20):
+  - expo-dev-menu/Vendored (6.0.21):
     - DoubleConversion
     - expo-dev-menu/SafeAreaView
     - glog
@@ -217,15 +217,15 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - ExpoAsset (11.0.4):
+  - ExpoAsset (11.0.5):
     - ExpoModulesCore
-  - ExpoFileSystem (18.0.11):
+  - ExpoFileSystem (18.0.12):
     - ExpoModulesCore
   - ExpoFont (13.0.4):
     - ExpoModulesCore
-  - ExpoHead (4.0.18):
+  - ExpoHead (4.0.19):
     - ExpoModulesCore
-  - ExpoImage (2.0.6):
+  - ExpoImage (2.0.7):
     - ExpoModulesCore
     - libavif/libdav1d
     - SDWebImage (~> 5.19.1)
@@ -1512,7 +1512,28 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - react-native-keyboard-controller (1.16.7):
+  - react-native-image-picker (8.2.0):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2024.01.01.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - Yoga
+  - react-native-keyboard-controller (1.16.8):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1931,6 +1952,27 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
+  - RNPermissions (5.3.0):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2024.01.01.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - Yoga
   - RNReanimated (3.16.7):
     - DoubleConversion
     - glog
@@ -2018,7 +2060,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNScreens (4.9.2):
+  - RNScreens (4.10.0):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -2039,9 +2081,9 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
-    - RNScreens/common (= 4.9.2)
+    - RNScreens/common (= 4.10.0)
     - Yoga
-  - RNScreens/common (4.9.2):
+  - RNScreens/common (4.10.0):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -2176,6 +2218,7 @@ DEPENDENCIES:
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - React-Mapbuffer (from `../node_modules/react-native/ReactCommon`)
   - React-microtasksnativemodule (from `../node_modules/react-native/ReactCommon/react/nativemodule/microtasks`)
+  - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - react-native-keyboard-controller (from `../node_modules/react-native-keyboard-controller`)
   - react-native-mmkv (from `../node_modules/react-native-mmkv`)
   - react-native-restart (from `../node_modules/react-native-restart`)
@@ -2209,6 +2252,7 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNFlashList (from `../node_modules/@shopify/flash-list`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSVG (from `../node_modules/react-native-svg`)
@@ -2337,6 +2381,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   React-microtasksnativemodule:
     :path: "../node_modules/react-native/ReactCommon/react/nativemodule/microtasks"
+  react-native-image-picker:
+    :path: "../node_modules/react-native-image-picker"
   react-native-keyboard-controller:
     :path: "../node_modules/react-native-keyboard-controller"
   react-native-mmkv:
@@ -2403,6 +2449,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@shopify/flash-list"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
+  RNPermissions:
+    :path: "../node_modules/react-native-permissions"
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
@@ -2419,16 +2467,16 @@ SPEC CHECKSUMS:
   EXConstants: a1f35b9aabbb3c6791f8e67722579b1ffcdd3f18
   EXJSONUtils: 01fc7492b66c234e395dcffdd5f53439c5c29c93
   EXManifests: 4e8c6aa537f44e72c2b4e2b71698234b623007da
-  Expo: 5c85580c5e4f0b566902b50a094771e0bc40ff8c
-  expo-dev-client: d79f0c977784497f4ab150d5c78256da234bc19d
-  expo-dev-launcher: efb168d6e52c4cafa1b2a5f93d594754ed811a95
-  expo-dev-menu: 7c002e3682ea4e48e46415304fed173e6e93395a
+  Expo: 3a8a619381412bbf8537746ec27b485be01c8a1f
+  expo-dev-client: 9a63f23c68c0fc826a72aee95e2791cd21b49ce5
+  expo-dev-launcher: cc76d20b6ca0a1b0cd57e9a942c705f365c33e92
+  expo-dev-menu: 5aa930f70034e1855d7f449bb51021df5dbfe41f
   expo-dev-menu-interface: 00dc42302a72722fdecec3fa048de84a9133bcc4
-  ExpoAsset: a4cbc27a7cd24a6e87eb719603790b2cfa8dd326
-  ExpoFileSystem: 4d2e7f77a41cfde8c3ae98580d872cd49437f993
+  ExpoAsset: 0687fe05f5d051c4a34dd1f9440bd00858413cfe
+  ExpoFileSystem: c8c19bf80d914c83dda3beb8569d7fb603be0970
   ExpoFont: 773955186469acc5108ff569712a2d243857475f
-  ExpoHead: a01c5aa019a20f06c117266be321ea5278d40ea1
-  ExpoImage: 36f2f4a3a530c1d1a2d349a1f0a0b400b0e1af47
+  ExpoHead: 266288a26bf2d6bc04909b5180d7478d2237f8ab
+  ExpoImage: c37f79e5e97e0a662ed1c4b17363464007da3148
   ExpoKeepAwake: 2a5f15dd4964cba8002c9a36676319a3394c85c7
   ExpoLinking: 0381341519ca7180a3a057d20edb1cf6a908aaf4
   ExpoLocalization: e36b911e04d371c6c6624ef818e56229bf51c498
@@ -2471,7 +2519,8 @@ SPEC CHECKSUMS:
   React-logger: 162c09cc432b02d4a0db31b1d98f6df5243a2679
   React-Mapbuffer: f760d2229640be48cb3c2d4832b5bbc3018123fc
   React-microtasksnativemodule: 1364ae5354f51b3ecee8eb718b5b6d1686d2ff4d
-  react-native-keyboard-controller: 2dd8ddb3c2acbd006404dc58ebc856c7704fea5a
+  react-native-image-picker: 1cd296bc9cc1875732651a729be6bbc3f65d32fb
+  react-native-keyboard-controller: 4da8ab8581e3d9043bc1f6f3b48450551edc7836
   react-native-mmkv: bb0824bed68c01f7cc681eefa58059097bdaa796
   react-native-restart: 7595693413fe3ca15893702f2c8306c62a708162
   react-native-safe-area-context: 458f6b948437afcb59198016b26bbd02ff9c3b47
@@ -2504,15 +2553,16 @@ SPEC CHECKSUMS:
   ReactCommon: 832cdd669aeecd430d9ca1975d15676b38d0b263
   RNFlashList: 6f169ad83e52579b7754cbbcec1b004c27d82c93
   RNGestureHandler: fc5ce5bf284640d3af6431c3a5c3bc121e98d045
+  RNPermissions: ed70a5d5a8d10201c75ac320035f24330559f4dd
   RNReanimated: 9ee6347ca0aa3cf78cae715455e781728ae142e2
-  RNScreens: fa4bdd98045564b02aa2d93cf53a3c3974feeb9c
+  RNScreens: 34770a3bf9e25f54c8e4683c2b20a20ab2b0c3a4
   RNSVG: 536cd3c866c878faf72beaba166c8b02fe2b762b
   SDWebImage: 8a6b7b160b4d710e2a22b6900e25301075c34cb3
   SDWebImageAVIFCoder: 00310d246aab3232ce77f1d8f0076f8c4b021d90
   SDWebImageSVGCoder: 15a300a97ec1c8ac958f009c02220ac0402e936c
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
-  Yoga: be6f55a028e86c83ae066f018e9b5d24ffc45436
+  Yoga: 2a5ae8f7db3c675ff5a781fb5d99c5f7a5d2fc11
 
 PODFILE CHECKSUM: af984619cb2d55c134fdb649596d13b5e5e83b7d
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.16.2

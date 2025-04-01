@@ -85,11 +85,7 @@ const StatisticsThroughPlatformScreen: React.FC = () => {
     <>
       <Stack.Screen
         options={{
-          headerShown: true,
           title: 'Thống kê qua nền tảng',
-          headerStyle: { backgroundColor: '#fff' },
-          headerTintColor: '#000',
-          headerTitleStyle: { fontWeight: 'bold' },
         }}
       />
 
