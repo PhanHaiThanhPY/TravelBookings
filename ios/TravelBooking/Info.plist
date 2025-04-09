@@ -72,13 +72,13 @@
     <false/>
     <key>UIStatusBarStyle</key>
     <string>UIStatusBarStyleDefault</string>
-    <key>UISupportedInterfaceOrientations</key>
-    <key>NSCameraUsageDescription</key>
+<key>NSCameraUsageDescription</key>
 <string>Ứng dụng của bạn cần quyền truy cập vào camera.</string>
 <key>NSPhotoLibraryUsageDescription</key>
 <string>Ứng dụng của bạn cần quyền truy cập vào thư viện ảnh.</string>
 <key>NSPhotoLibraryAddUsageDescription</key>
 <string>Ứng dụng của bạn cần quyền lưu trữ ảnh vào thư viện.</string>
+    <key>UISupportedInterfaceOrientations</key>
     <array>
       <string>UIInterfaceOrientationPortrait</string>
       <string>UIInterfaceOrientationPortraitUpsideDown</string>

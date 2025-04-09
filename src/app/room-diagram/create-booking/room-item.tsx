@@ -6,10 +6,11 @@ import { Room } from '@/api/room/room';
 
 interface RoomItemProps {
   item: Room;
+  type: 'normal' | 'selected';
   onSelect?: () => void;
 }
 
-const RoomItem = ({ item, onSelect }: RoomItemProps) => (
+const RoomItem = ({ item, onSelect, type }: RoomItemProps) => (
   <TouchableOpacity
     onPress={onSelect}
     className={`flex-row items-center gap-2 p-3 rounded-lg bg-white border my-2 ${
@@ -43,9 +44,9 @@ const RoomItem = ({ item, onSelect }: RoomItemProps) => (
     </View>
     {item.selected && (
       <Ionicons
-        name="checkmark-circle"
+        name={`${type === 'selected' ? 'trash-outline' : 'checkmark-circle'}`}
         size={24}
-        color="#3B82F6"
+        color={`${type === 'selected' ? '#ED3B36' : '#3B82F6'}`}
         className="ml-3"
       />
     )}

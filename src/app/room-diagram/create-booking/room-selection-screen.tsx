@@ -107,7 +107,7 @@ const RoomSelectionScreen = () => {
         <FlatList
           data={localRooms}
           renderItem={({ item }) => (
-            <RoomItem item={item} onSelect={() => handleRoomSelect(item.id)} />
+            <RoomItem item={item} onSelect={() => handleRoomSelect(item.id)} type={'normal'} />
           )}
           keyExtractor={(item) => item.id}
           className="flex-1"

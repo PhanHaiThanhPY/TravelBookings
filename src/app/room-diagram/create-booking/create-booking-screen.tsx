@@ -1,19 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  ScrollView,
-  FlatList,
-} from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { router, Stack, useLocalSearchParams } from 'expo-router';
-import { IconEmpty } from '@/components/ui/icons/icon-empty';
+import { router } from 'expo-router';
 import EmptyCustom from '@/components/custom/empty-custom';
-import { styles } from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheetScrollable/BottomSheetFlashList';
 import RoomItem from './room-item';
 import { useRoom } from '@/lib/room';
 import Header from '@/components/custom/header';
+import { useCustomer } from '@/lib/customer';
+import { Customer } from '@/api/customer';
 interface Room {
   id: string;
   name: string;
@@ -25,9 +19,10 @@ interface Room {
 }
 const CreateBookingScreen = () => {
   const { rooms, setRooms } = useRoom();
+  const { customers, setCustomers } = useCustomer();
   const [selectedRooms, setSelectedRooms] = useState<Room[]>([]);
   useEffect(() => {
-    setSelectedRooms(rooms as any[]);
+    setSelectedRooms(rooms as Room[]);
   }, [rooms]);
 
   const renderSelectedRooms = () => {
@@ -35,10 +30,18 @@ const CreateBookingScreen = () => {
       return <EmptyCustom />;
     }
 
-    return selectedRooms.map((item) => <RoomItem key={item.id} item={item} />);
+    return selectedRooms.map((item) => (
+      <RoomItem key={item.id} item={item} type="selected" />
+    ));
   };
   const handleBackPress = () => {
     setRooms([]);
+    setCustomers({
+      id: '',
+      name: '',
+      phone: '',
+      selected: false,
+    } as Customer);
     router.back();
   };
   return (
@@ -61,7 +64,15 @@ const CreateBookingScreen = () => {
               color="#374151"
               className="mr-3"
             />
-            <Text className="text-base flex-1">Khách lẻ</Text>
+            {customers.name === '' ? (
+              <Text className="text-base flex-1">Khách lẻ</Text>
+            ) : (
+              <View className="flex-1">
+                <Text className="text-base">{customers.name}</Text>
+                <Text className="text-sm text-gray-500">{customers.phone}</Text>
+              </View>
+            )}
+
             <Ionicons name="chevron-forward" size={20} color="#374151" />
           </TouchableOpacity>
           <View className="w-full h-[1px] bg-gray-200"></View>

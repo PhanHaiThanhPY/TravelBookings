@@ -9,6 +9,8 @@ import DonutChartSection from '../home/donut-chart-section';
 import Header from '../home/header';
 import LeaderBoard from '../home/leader-board';
 import LineChartSection from '../home/line-chart-section';
+import CustomDatePicker from '@/components/custom/CustomDatePicker';
+import CustomDatePickerModal from '@/components/custom/CustomDatePicker';
 
 export default function HomeScreen() {
   return (
@@ -20,14 +22,26 @@ export default function HomeScreen() {
         barStyle="dark-content"
         showHideTransition="slide"
       />
+
       <View style={{ flex: 1 }}>
         <ScrollView style={styles.container}>
           <Header />
           <BookingCard />
-          {/* <DatePicker
-            onDateSelect={() => { }}
-            title="Chọn thời gian"
-            rangeSelection={true}
+          {/* <TimePicker
+            visible={true}
+            onClose={() => {}}
+            onConfirm={(time: any) => {
+              console.log('Đã chọn:', time); // { hour: XX, minute: XX, second: XX }
+            }}
+          /> */}
+          {/* <CustomDatePickerModal
+            visible={true}
+            onClose={() => {}}
+            onSelectDate={(date) => {
+              console.log(date);
+            }}
+            minDate={new Date(2024, 0, 1)} // 1/1/2024
+            maxDate={new Date(2025, 11, 31)} // 31/12/2025
           /> */}
 
           <CombinedRevenueChart />
